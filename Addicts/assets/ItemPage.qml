@@ -10,18 +10,22 @@ Page {
         id: titlebar
     }
     Container {
+        
         Label {
             id:titleArticle
             multiline: true
+            verticalAlignment: VerticalAlignment.Center
+            accessibility.name: "label"
+            //            text : UI.Maj("ok");
         }
-        ImageView {
-            id: imageArticle
-        }
-        
-        Label {
-            id:corpsArticle
-            multiline: true
-        }
+//        ImageView {
+//            id: imageArticle
+//        }
+//        
+//        Label {
+//            id:corpsArticle
+//            multiline: true
+//        }
 
     }
 }

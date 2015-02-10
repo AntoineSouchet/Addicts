@@ -39,22 +39,33 @@ NavigationPane {
                 listItemComponents: [
                     ListItemComponent {
                         type: "item"
-                        StandardListItem {            
-                            title: propertyMap.name
+                        StandardListItem {      
+      
+                            title: if (ListItemData.categorie == "actualites") { "Actualités" } 
+                                    else if (ListItemData.categorie == "ecosysteme") { "EcoSysteme" }
+                                    else if (ListItemData.categorie == "terminaux") { "Terminaux" }
+                                    else if (ListItemData.categorie == "applications") { "Applications" }
+                                    else (ListItemData.categorie)
                             description: ListItemData.nom
                             status: ListItemData.date  
                         }  
                     }
                 ]
                 onTriggered: {
+//                    var selectedItem = dataModel.data(indexPath);
+//                    var UrlCall = "http://www.blackberry-10.fr/json_billet.php?article=" + selectedItem.id;
+//                    var page = detailPage.createObject();
+//                    page.itemPageTitle = selectedItem.categorie + " le " + selectedItem.date +" par " + selectedItem.auteur
+//                    //page.titleArticle = "<html><center><b>" + selectedItem.nom + "</b></center></html>"
+//                   //  page.imageArticle = Application.ge
+//                   // page.corpsArticle = "<html>" + selectedItem.corps + "</html>"
+//                   var corps = selectedItem.corps.toString();   
+//                    page.corpsArticle = "<html><b>" + selectedItem.corps + "</b></html>"
+//                    nav.push(page);
                     var selectedItem = dataModel.data(indexPath);
-                    var UrlCall = "http://www.blackberry-10.fr/json_billet.php?article=" + selectedItem.id;
-                    var page = detailPage.createObject();
-                    page.itemPageTitle = selectedItem.categorie + " le " + selectedItem.date +" par " + selectedItem.auteur
-                    page.titleArticle = selectedItem.nom
-                  //  page.imageArticle = Application.ge
-                   // page.corpsArticle = "<html>" + selectedItem.corps + "</html>"
-                    page.corpsArticle = "<html><b>" + selectedItem.corps + "</b></html>"
+                    var page = webPage.createObject();
+                    page.htmlContent = "<u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></u><br /><br />" + selectedItem.corps;
+                    page.titleBar.title = selectedItem.nom
                     nav.push(page);
                     
                 }
@@ -108,6 +119,49 @@ NavigationPane {
             id: dataModel
             sortedAscending: false
             grouping: ItemGrouping.None
+        },
+        ComponentDefinition {
+            id: webPage
+            Page {
+                property alias htmlContent: detailView.html
+                titleBar: TitleBar {
+
+                }
+                Container {
+                    ActivityIndicator {
+                        id: indicatorWeb
+                        horizontalAlignment: HorizontalAlignment.Center
+                        minHeight: 100
+                        minWidth: 100
+                        accessibility.name: "myIndicator"
+                        
+                    }
+                    ScrollView {
+                        scrollViewProperties.scrollMode: ScrollMode.Vertical
+                        WebView {
+                            id: detailView; 
+                                
+                            onLoadingChanged: {
+                                if (loadRequest.status ==  WebLoadStatus.Started ) {
+                                    indicatorWeb.start();
+                                    detailView.visible = false;
+                                }
+                                else if (loadRequest.status ==  WebLoadStatus.Succeeded ) {
+                                    indicatorWeb.stop();
+                                    detailView.visible = true;
+                                }
+                                else if (loadRequest.status ==  WebLoadStatus.Failed ) {
+                                    indicatorWeb.stop();
+                                    detailView.html = "<b>Impossible de charger la page, vérifiez votre connection Internet.</b>"
+                                }
+                            }
+                            accessibility.name: "WebView"
+                        }
+                        accessibility.name: "ScrollView"
+
+                    }
+                }
+            }
         },
         DataSource {
                     id: dataSource

@@ -5,9 +5,16 @@ Page {
         title : "Préférences"
     }
     Container {
+            topMargin: 80
+            Label {
+                text : ""
+                topMargin: 80
+            }
         Button {
             topMargin: 80
             topPadding: 80
+            leftMargin: 10
+            rightMargin: 10
             text: "Changer théme (uniqument 10.3)"
             imageSource: "asset:///images/ic_select.png"
             
