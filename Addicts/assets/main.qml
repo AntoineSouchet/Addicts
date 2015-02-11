@@ -39,15 +39,18 @@ NavigationPane {
                 listItemComponents: [
                     ListItemComponent {
                         type: "item"
+                        
                         StandardListItem {      
       
-                            title: if (ListItemData.categorie == "actualites") { "Actualités" } 
-                                    else if (ListItemData.categorie == "ecosysteme") { "EcoSysteme" }
-                                    else if (ListItemData.categorie == "terminaux") { "Terminaux" }
-                                    else if (ListItemData.categorie == "applications") { "Applications" }
-                                    else (ListItemData.categorie)
+                            title: if (ListItemData.categorie == "actualites") { "<html><span style='color: #2980b9;'>Actualités</span></html>" } 
+                            else if (ListItemData.categorie == "ecosysteme") { "<html><span style='color: #2980b9;'>EcoSysteme</span></html>" }
+                            else if (ListItemData.categorie == "terminaux") { "<html><span style='color: #2980b9;'>Terminaux</span></html>" }
+                            else if (ListItemData.categorie == "applications") { "<html><span style='color: #2980b9;'>Applications</span></html>" }
+                            else if (ListItemData.categorie == "opérateurs") { "<html><span style='color: #2980b9;'>Opérateurs</span></html>" }
+                            else ( "<html><span style='color: #2980b9;'>" + ListItemData.categorie + "</span></html>")
                             description: ListItemData.nom
                             status: ListItemData.date  
+
                         }  
                     }
                 ]
@@ -64,7 +67,7 @@ NavigationPane {
 //                    nav.push(page);
                     var selectedItem = dataModel.data(indexPath);
                     var page = webPage.createObject();
-                    page.htmlContent = "<u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></u><br /><br />" + selectedItem.corps;
+                    page.htmlContent = "<div width='100%' style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;'><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br />" + selectedItem.corps + "</div>";
                     page.titleBar.title = selectedItem.nom
                     nav.push(page);
                     
@@ -90,7 +93,18 @@ NavigationPane {
                     var page = prefPages.createObject();
                     nav.push(page);
                 }
-            } ,     
+            } , 
+//            TODO community/personnalisation menu (background image, BBM, FB)
+//            ActionItem {
+//                 title: "Outils"
+//                 //TODO ADD IMAGE SOURCE
+//                 ActionBar.placement: ActionBarPlacement.OnBar
+//                 onTriggered: {
+//                     var page = wallPages.createObject();
+//                     nav.push(page);
+//                 }
+//                    
+//            }, 
             ActionItem {
                 title: "A propos"
                 imageSource: "asset:///images/ic_help.png"
@@ -108,6 +122,10 @@ NavigationPane {
             source: "Pref.qml"
         },
         ComponentDefinition {
+            id: wallPages
+            source: "wall.qml"
+        },
+        ComponentDefinition {
             id: proposPages
             source: "Apropos.qml"
         },
@@ -118,7 +136,7 @@ NavigationPane {
         GroupDataModel {
             id: dataModel
             sortedAscending: false
-            grouping: ItemGrouping.None
+            grouping: ItemGrouping.ByFullValue
         },
         ComponentDefinition {
             id: webPage
@@ -137,10 +155,14 @@ NavigationPane {
                         
                     }
                     ScrollView {
+                        topPadding: 10
+                        leftPadding: 30
+                        rightPadding: 30
                         scrollViewProperties.scrollMode: ScrollMode.Vertical
                         WebView {
                             id: detailView; 
-                                
+                            leftPadding: 30
+                            rightPadding: 30
                             onLoadingChanged: {
                                 if (loadRequest.status ==  WebLoadStatus.Started ) {
                                     indicatorWeb.start();

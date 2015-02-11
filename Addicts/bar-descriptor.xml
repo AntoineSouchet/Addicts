@@ -69,6 +69,15 @@
     <!-- <copyright></copyright> -->
 
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
+    <icon>
+       <image>Addicts2.png</image>
+       <image>Addicts.png</image>
+    </icon>
+    <splashScreens>
+       <image>SplashScreen1.jpg</image>
+       <image>SplashScreen2.jpg</image>
+       <image>SplashScreen3.jpg</image>
+    </splashScreens>
     <category>core.media</category>
     <authorId>gYAAgLaNFCiY8kZK2XCWA2emW58</authorId>
     <description>Mobile version of &quot;Addicts &#xe0; Blackberry 10&quot;.&#xD;
@@ -84,9 +93,6 @@ French website of community BB.</description>
     </initialWindow>
 
     <!--  The icon for the application, which should be 114x114. -->
-    <icon>
-        <image>Addicts.png</image>
-    </icon>
 
     <asset path="icon.png">icon.png</asset>
     <asset path="assets">assets</asset>
@@ -95,11 +101,17 @@ French website of community BB.</description>
     <asset path="translations" dest="qm">
         <include name="*.qm"/>
     </asset>
-    <asset path="assets/images/Addicts.png">Addicts.png</asset>
+    <asset path="C:/Users/AS250818/Documents/Perso/SplashScreen1.jpg">SplashScreen1.jpg</asset>
+    <asset path="C:/Users/AS250818/Documents/Perso/SplashScreen2.jpg">SplashScreen2.jpg</asset>
+    <asset path="C:/Users/AS250818/Documents/Perso/SplashScreen3.jpg">SplashScreen3.jpg</asset>
+    <asset path="C:/Users/AS250818/Documents/Perso/Addicts2.png">Addicts2.png</asset>
+    <asset path="C:/Users/AS250818/Documents/Perso/SplashScreen4.jpg">SplashScreen4.jpg</asset>
+    <asset path="C:/Users/AS250818/Documents/Perso/Addicts.png">Addicts.png</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
     <permission>access_internet</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
+    <env var="CASCADES_THEME" value="default"/>
 
 </qnx>

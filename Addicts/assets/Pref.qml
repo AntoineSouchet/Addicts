@@ -1,25 +1,23 @@
 import bb.cascades 1.2
+import bb.system 1.0
 
 Page {
     titleBar: TitleBar {
         title : "Préférences"
     }
     Container {
-            topMargin: 80
-            Label {
-                text : ""
-                topMargin: 80
-            }
-        Button {
-            topMargin: 80
             topPadding: 80
-            leftMargin: 10
-            rightMargin: 10
-            text: "Changer théme (uniqument 10.3)"
+            Label {
+                text : "<html><b>Changer le théme de l'application</b></html>"
+                
+                horizontalAlignment: HorizontalAlignment.Center
+            }
+            
+        Button {
             imageSource: "asset:///images/ic_select.png"
             
             horizontalAlignment: HorizontalAlignment.Center
-
+            text: "Switcher"
             verticalAlignment: VerticalAlignment.Center
             // Checks the current theme and then flips the value
             onClicked: {
@@ -31,16 +29,24 @@ Page {
                 }
             }
         }
-        Button {   
-            text: "Vider cache application"
+        Label {
+            topPadding: 60
+            topMargin: 60
             horizontalAlignment: HorizontalAlignment.Center
+            text: "<html><b>Supprimer le cache de l'application</b></html>"
+        }
+        Button {   
+            text: "Vider"
+            horizontalAlignment: HorizontalAlignment.Center
+            attachedObjects: [
+                SystemToast {
+                    id: cacheToast
+                    body: "Cache vidé"
+                    button.enabled: false
+                }   
+            ]
             onClicked: {
-                if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
-                    Application.themeSupport.setVisualStyle(VisualStyle.Dark);
-                }       
-                else {
-                    Application.themeSupport.setVisualStyle(VisualStyle.Bright);
-                }
+                cacheToast.show()
             }
         }
     }

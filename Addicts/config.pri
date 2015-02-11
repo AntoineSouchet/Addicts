@@ -43,7 +43,16 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_help.png) \
         $$quote($$BASEDIR/assets/images/ic_resume.png) \
         $$quote($$BASEDIR/assets/images/ic_select.png) \
-        $$quote($$BASEDIR/assets/main.qml)
+        $$quote($$BASEDIR/assets/main.qml) \
+        $$quote($$BASEDIR/assets/wall.qml) \
+        $$quote($$BASEDIR/assets/wallpapers/wall_1.jpg) \
+        $$quote($$BASEDIR/assets/wallpapers/wall_2.jpg) \
+        $$quote($$BASEDIR/assets/wallpapers/wall_3.jpg) \
+        $$quote($$BASEDIR/assets/wallpapers/wall_4.jpg) \
+        $$quote($$BASEDIR/assets/wallpapers/wall_5.jpg) \
+        $$quote($$BASEDIR/assets/wallpapers/wall_6.jpg) \
+        $$quote($$BASEDIR/assets/wallpapers/wall_7.jpg) \
+        $$quote($$BASEDIR/assets/wallpapers/wall_8.jpg)
 }
 
 config_pri_source_group1 {
@@ -73,7 +82,10 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/*.qs) \
         $$quote($$BASEDIR/../assets/images/*.qml) \
         $$quote($$BASEDIR/../assets/images/*.js) \
-        $$quote($$BASEDIR/../assets/images/*.qs)
+        $$quote($$BASEDIR/../assets/images/*.qs) \
+        $$quote($$BASEDIR/../assets/wallpapers/*.qml) \
+        $$quote($$BASEDIR/../assets/wallpapers/*.js) \
+        $$quote($$BASEDIR/../assets/wallpapers/*.qs)
 
     HEADERS += \
         $$quote($$BASEDIR/../src/*.h) \

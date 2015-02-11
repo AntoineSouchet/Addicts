@@ -6,6 +6,6 @@ QT += network
 LIBS += -lbb
 LIBS += -lbbdata
 LIBS += -lbbsystem
-
+LIBS += -lbbplatform
 
 include(config.pri)

@@ -1,5 +1,5 @@
 1
-8
+17
 Apropos.qml
 images/Addicts.png
 images/ic_help.png
@@ -8,3 +8,12 @@ images/ic_select.png
 ItemPage.qml
 main.qml
 Pref.qml
+wall.qml
+wallpapers/wall_1.jpg
+wallpapers/wall_2.jpg
+wallpapers/wall_3.jpg
+wallpapers/wall_4.jpg
+wallpapers/wall_5.jpg
+wallpapers/wall_6.jpg
+wallpapers/wall_7.jpg
+wallpapers/wall_8.jpg
