@@ -17,7 +17,7 @@ Page {
             imageSource: "asset:///images/ic_select.png"
             
             horizontalAlignment: HorizontalAlignment.Center
-            text: "Switcher"
+            text: "Switcher (10.3 uniquement)"
             verticalAlignment: VerticalAlignment.Center
             // Checks the current theme and then flips the value
             onClicked: {

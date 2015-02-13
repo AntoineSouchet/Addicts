@@ -22,7 +22,6 @@
 #include <bb/cascades/LocaleHandler>
 #include <bb/cascades/Image>
 #include <QtNetwork>
-#include "Utils.h"
 
 using namespace bb::cascades;
 

@@ -57,7 +57,6 @@
     <!-- Fourth digit segment of the package version. First three segments are taken from the
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
     <buildId>1</buildId>
-    <packageLocale>fr</packageLocale>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!-- <versionLabel></versionLabel> -->
@@ -88,13 +87,13 @@ French website of community BB.</description>
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
 
     <initialWindow>
-        <autoOrients>true</autoOrients>
+        <autoOrients>false</autoOrients>
+        <aspectRatio>portrait</aspectRatio>
         <systemChrome>none</systemChrome>
     </initialWindow>
 
     <!--  The icon for the application, which should be 114x114. -->
 
-    <asset path="icon.png">icon.png</asset>
     <asset path="assets">assets</asset>
 
     <!-- Locale support -->

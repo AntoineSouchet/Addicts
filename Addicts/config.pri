@@ -37,13 +37,33 @@ simulator {
 config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/Apropos.qml) \
-        $$quote($$BASEDIR/assets/ItemPage.qml) \
         $$quote($$BASEDIR/assets/Pref.qml) \
+        $$quote($$BASEDIR/assets/detailTeam.qml) \
+        $$quote($$BASEDIR/assets/icon/twitter.png) \
+        $$quote($$BASEDIR/assets/icon/téléchargement.png) \
+        $$quote($$BASEDIR/assets/icon/utube.gif) \
         $$quote($$BASEDIR/assets/images/Addicts.png) \
+        $$quote($$BASEDIR/assets/images/background.png) \
+        $$quote($$BASEDIR/assets/images/ic_contact.png) \
         $$quote($$BASEDIR/assets/images/ic_help.png) \
         $$quote($$BASEDIR/assets/images/ic_resume.png) \
         $$quote($$BASEDIR/assets/images/ic_select.png) \
         $$quote($$BASEDIR/assets/main.qml) \
+        $$quote($$BASEDIR/assets/model/team.xml) \
+        $$quote($$BASEDIR/assets/team.qml) \
+        $$quote($$BASEDIR/assets/teamImages/allan.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/antoine.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/aurelienb.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/buckss.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/christian.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/giovanni.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/ibrahim.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/laetitia.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/matt.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/nixsoo.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/paolo75.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/romain.jpg) \
+        $$quote($$BASEDIR/assets/teamImages/stev.jpg) \
         $$quote($$BASEDIR/assets/wall.qml) \
         $$quote($$BASEDIR/assets/wallpapers/wall_1.jpg) \
         $$quote($$BASEDIR/assets/wallpapers/wall_2.jpg) \
@@ -57,13 +77,10 @@ config_pri_assets {
 
 config_pri_source_group1 {
     SOURCES += \
-        $$quote($$BASEDIR/src/Utils.cpp) \
         $$quote($$BASEDIR/src/applicationui.cpp) \
         $$quote($$BASEDIR/src/main.cpp)
 
-    HEADERS += \
-        $$quote($$BASEDIR/src/Utils.h) \
-        $$quote($$BASEDIR/src/applicationui.hpp)
+    HEADERS += $$quote($$BASEDIR/src/applicationui.hpp)
 }
 
 CONFIG += precompile_header
@@ -80,9 +97,18 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/*.qml) \
         $$quote($$BASEDIR/../assets/*.js) \
         $$quote($$BASEDIR/../assets/*.qs) \
+        $$quote($$BASEDIR/../assets/icon/*.qml) \
+        $$quote($$BASEDIR/../assets/icon/*.js) \
+        $$quote($$BASEDIR/../assets/icon/*.qs) \
         $$quote($$BASEDIR/../assets/images/*.qml) \
         $$quote($$BASEDIR/../assets/images/*.js) \
         $$quote($$BASEDIR/../assets/images/*.qs) \
+        $$quote($$BASEDIR/../assets/model/*.qml) \
+        $$quote($$BASEDIR/../assets/model/*.js) \
+        $$quote($$BASEDIR/../assets/model/*.qs) \
+        $$quote($$BASEDIR/../assets/teamImages/*.qml) \
+        $$quote($$BASEDIR/../assets/teamImages/*.js) \
+        $$quote($$BASEDIR/../assets/teamImages/*.qs) \
         $$quote($$BASEDIR/../assets/wallpapers/*.qml) \
         $$quote($$BASEDIR/../assets/wallpapers/*.js) \
         $$quote($$BASEDIR/../assets/wallpapers/*.qs)
@@ -95,5 +121,4 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../src/*.hxx)
 }
 
-TRANSLATIONS = $$quote($${TARGET}_fr.ts) \
-    $$quote($${TARGET}.ts)
+TRANSLATIONS = $$quote($${TARGET}.ts)

@@ -1,10 +1,19 @@
 import bb.cascades 1.2
 
 Page {
+    
     titleBar: TitleBar {
         title : "A propos"
     }
     Container {
+//        background: back.imagePaint
+//        attachedObjects: [
+//            ImagePaintDefinition {
+//                id: back
+//                repeatPattern: RepeatPattern.XY
+//                imageSource: "asset:///images/background.png"
+//            }
+//        ]
         topPadding: 30
         leftPadding: 30  
         ImageView {
@@ -12,6 +21,7 @@ Page {
             accessibility.name: "ImagePropos"
             horizontalAlignment: HorizontalAlignment.Center
         }
+
         Label {
             text: "Responsable de la publication : Maketheweb
             Contact : contact@blackberry-10.fr"

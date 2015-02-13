@@ -19,11 +19,55 @@ import bb.data 1.0
 
 
 NavigationPane {
+    
+    
     id: nav
+    Menu.definition: MenuDefinition {
+        
+
+        actions: [
+            ActionItem {
+                title: "Rafraichir"
+                imageSource: "asset:///images/ic_resume.png"
+                
+                onTriggered: {
+                    myIndicator.start();
+                    dataSource.load();
+                    myIndicator.stop();
+                }
+            },
+            ActionItem {
+                title: "Préférences"
+
+                onTriggered: {
+                    var page = prefPages.createObject();
+                    nav.push(page);
+                }
+            },
+            ActionItem {
+                title: "Equipes"
+                imageSource: "asset:///images/ic_contact.png"
+                onTriggered: {
+                    var page = teamPages.createObject();
+                    nav.push(page);
+                }
+            },
+            ActionItem {
+                title: "A propos"
+                imageSource: "asset:///images/ic_help.png"
+                onTriggered: {
+                    var page = proposPages.createObject();
+                    nav.push(page);
+                }
+            }
+            //TODO add ActionItem for Background change
+        ] 
+    } 
     Page {
         titleBar: TitleBar {
-            title : "Addicts à Blackberry 10"
+            title : "Addicts"
         }
+
         
         Container {
             ActivityIndicator {
@@ -55,16 +99,6 @@ NavigationPane {
                     }
                 ]
                 onTriggered: {
-//                    var selectedItem = dataModel.data(indexPath);
-//                    var UrlCall = "http://www.blackberry-10.fr/json_billet.php?article=" + selectedItem.id;
-//                    var page = detailPage.createObject();
-//                    page.itemPageTitle = selectedItem.categorie + " le " + selectedItem.date +" par " + selectedItem.auteur
-//                    //page.titleArticle = "<html><center><b>" + selectedItem.nom + "</b></center></html>"
-//                   //  page.imageArticle = Application.ge
-//                   // page.corpsArticle = "<html>" + selectedItem.corps + "</html>"
-//                   var corps = selectedItem.corps.toString();   
-//                    page.corpsArticle = "<html><b>" + selectedItem.corps + "</b></html>"
-//                    nav.push(page);
                     var selectedItem = dataModel.data(indexPath);
                     var page = webPage.createObject();
                     page.htmlContent = "<div width='100%' style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;'><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br />" + selectedItem.corps + "</div>";
@@ -75,51 +109,15 @@ NavigationPane {
                 accessibility.name: "FirstListView"
             }    
         }
-        actions: [
-            ActionItem {
-                title: "Rafraichir"
-                imageSource: "asset:///images/ic_resume.png"
-                ActionBar.placement: ActionBarPlacement.OnBar
-                onTriggered: {
-                    myIndicator.start();
-                    dataSource.load();
-                    myIndicator.stop();
-                }
-            },   
-            ActionItem {
-                title: "Préférences"
-                ActionBar.placement: ActionBarPlacement.OnBar
-                onTriggered: {
-                    var page = prefPages.createObject();
-                    nav.push(page);
-                }
-            } , 
-//            TODO community/personnalisation menu (background image, BBM, FB)
-//            ActionItem {
-//                 title: "Outils"
-//                 //TODO ADD IMAGE SOURCE
-//                 ActionBar.placement: ActionBarPlacement.OnBar
-//                 onTriggered: {
-//                     var page = wallPages.createObject();
-//                     nav.push(page);
-//                 }
-//                    
-//            }, 
-            ActionItem {
-                title: "A propos"
-                imageSource: "asset:///images/ic_help.png"
-                ActionBar.placement: ActionBarPlacement.OnBar
-                onTriggered: {
-                    var page = proposPages.createObject();
-                    nav.push(page);
-                }
-            }  
-        ]
     }
     attachedObjects: [
         ComponentDefinition {
             id: prefPages
             source: "Pref.qml"
+        },
+        ComponentDefinition {
+            id: teamPages
+            source: "team.qml"
         },
         ComponentDefinition {
             id: wallPages
@@ -128,10 +126,6 @@ NavigationPane {
         ComponentDefinition {
             id: proposPages
             source: "Apropos.qml"
-        },
-        ComponentDefinition {
-            id: detailPage
-            source: "ItemPage.qml"
         },
         GroupDataModel {
             id: dataModel

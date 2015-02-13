@@ -1,0 +1,35 @@
+<model>
+  <header title="Responsable général">
+    <item title="Steven K." subtitle="Étudiant en économie, je suis passionné de nouvelles technologies et j'utilise BlackBerry depuis plusieurs années ! Si vous avez un problème j'essaye de vous aider sur le Forum à l'aide de mon Q10 sinon je rédige des articles à mes heures perdues au lieu de réviser mes partiels... Je n'arrête pas d'harceler Paolo75 pour qu'il fasse des améliorations techniques sur le site et le forum. 
+
+À part ça je suis aussi photographe amateur complètement accro à Photoshop et j'essaye de faire des vidéos entre deux dérivées." image="asset:///teamImages/stev.jpg" />
+  </header>
+  <header title="Division rédaction">
+    <item title="Giovanni" image="asset:///teamImages/giovanni.jpg" subtitle="Consultant dans l'informatique et fan de BlackBerry depuis 2006. Pour rien au monde il changerait de marque de mobile !" />
+    <item title="Allan" image="asset:///teamImages/allan.jpg" subtitle="BlackBerry-User depuis 5 ans, accro à son BlackBerry Passport. 
+Aussi rapide que l'éclair je navigue et écris entre le forum et les articles afin de vous aider le plus possible ! :)"/>
+    <item title="Ibrahim" image="asset:///teamImages/ibrahim.jpg" subtitle="Etudiant en Sciences, geek et mélomane. Fan de BlackBerry depuis plusieurs années. Accro aux claviers physiques." />
+    <item title="A. Botermans" image="asset:///teamImages/aurelienb.jpg" subtitle="Passionné de nouvelles technologies et du web social. Connecté en permanence, aucune information ne lui échappe !" />
+    <item title="Jordan K." image="asset:///teamImages/nixsoo.jpg" subtitle="Étudiant en droit. Technophile avéré, il suit de près tout ce qui concerne BlackBerry. Tapote sur son Q10 jusqu'à 15 heures par jour." />
+    <item title="Christian" image="asset:///teamImages/christian.jpg" subtitle="Christian, quinqua geek, curieux de tout ce qui touche aux nouvelles technologies et aux mobiles. Z30 et Classic addict ! Je vous présente les accessoires indispensables pour accompagner votre BB10." />
+  </header>
+    <header title="Division réseaux sociaux">
+        <item title="Matthieu W." image="asset:///teamImages/matt.jpg" subtitle="Designer dans l’aéronautique. Geek depuis toujours, BlackBerry user et fan de la marque depuis le Bold 9000. Connecté H24, accompagné de son BlackBerry Passport rouge. Je m'occupe aussi de la chaîne BBM BlackBerry Life Style C00093FDD" />
+        <item title="Romain G." image="asset:///teamImages/romain.jpg" subtitle="BlackBerry user et addict. Fan de le marque Canadienne depuis bientôt 10 ans... et je ne changerai pour rien au monde mes BlackBerry à clavier physique. Suivez moi aussi sur BBM Channel : C000CAECA et C0031261B. Keep Moving !" />
+    </header>
+    <header title="Division forum">
+    	<item title="Antoine" image="asset:///teamImages/antoine.jpg" subtitle="Ingénieur recherche et développement JAVA, fan de BB depuis presque toujours et surtout de la version 10. H24 avec son P9982."/>
+    	<item title="Laetitia" image="asset:///teamImages/laetitia.jpg" subtitle="Jeune femme moderne, fan de Blackberry depuis 2008 et geek à ses heures : elle ne se sépare jamais de son Q10 blanc !" />
+    </header>
+    <header title="Division technique">
+    	<item title="Kevin B." image="asset:///teamImages/buckss.jpg" subtitle="Addict aux OS leaks et à toutes les news BlackBerry, armé de mon Passport rien ne m'échappe. 
+
+En effet OS non-officiel ou (officiel), programme Beta ,etc, une question ? N'hésitez pas à me solliciter ici. 
+J'en suis Addict !!
+Également adorateur de la sécurité mobile.
+Dés que le temps me le permet, un article rédigé ! 
+
+PS:Quand Steven ne donne pas de travail à Paolo, c'est moi qui viens le solliciter ! :p"/>
+    	<item title="Paolo75" image="asset:///teamImages/paolo75.jpg" subtitle="Si tu veux parler micro données Google, jointures Mysql, manipulations du DOM avec Jquery ou traitement de tableaux JSON en PHP alors tu as frappé à la bonne porte ! Je m'occupe de toute la partie technique du portail (dont le fameux point-virgule involontaire qui te fait sauter 900 lignes de codes et que ne trouves qu'au bout d'1/4 d'heure!) et de son expérience utilisateur multiplateforme (compatibilité, hacks CSS, toussa toussa). " />
+   	</header>
+</model>
