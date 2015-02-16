@@ -4,6 +4,9 @@ import bb.system 1.0
 
 
 Page {
+    titleBar: TitleBar {
+        title : "Equipe des Addicts"
+    }
     content: Container {
         ListView {
       

@@ -6,14 +6,6 @@ Page {
         title : "A propos"
     }
     Container {
-//        background: back.imagePaint
-//        attachedObjects: [
-//            ImagePaintDefinition {
-//                id: back
-//                repeatPattern: RepeatPattern.XY
-//                imageSource: "asset:///images/background.png"
-//            }
-//        ]
         topPadding: 30
         leftPadding: 30  
         ImageView {
@@ -28,12 +20,13 @@ Page {
             multiline: true
         }
         Label {
-            text: "<html><b>Propriété intellectuelle :</b></html>" 
-            multiline: false 
+            text: "<html><b>Retrouvez nous sur :</b></html>"
         }
         Label {
-            text: "La reproduction ou représentation, intégrale ou partielle, des pages, des données et de tout autre élément constitutif de la présente application, par quelque procédé ou support que ce soit, est interdite et constitue une contrefaçon lorsqu'elle est faite sans l'autorisation expresse de l'éditeur "
-            multiline: true
+            text:"<html><a href='https://www.facebook.com/AddictsABlackberry10?fref=ts'>Facebook</a></html>";
+        }
+        Label {
+            text:"<html><a href='https://twitter.com/blackberry10_fr'>Twitter</a></html>";
         }
         Label {
             text: "<html><b>Développeurs</b></html>"
@@ -44,6 +37,26 @@ Page {
         }
         Label {
             text: "Antoine Lavigne"
+        }
+        Label {
+            text: "Avec la participation de Steven et Kevin B. ;)"
+        }
+        Label {
+            text: "<html><b>Partager cette application sur </b></html>"
+        }
+        Button {
+            text: "Twitter"
+            imageSource: "asset:///icon/128-twitter.png"
+            onClicked: {
+                ApplicationUI.twitter("http://appworld.blackberry.com/webstore/content/59952277/?lang=fr&countrycode=US&CPID=KNC-kw2112_p13")
+            }
+        }
+        Button {
+            text: "Facebook"
+            imageSource: "asset:///icon/128-facebook.png"
+            onClicked: {
+            ApplicationUI.facebook("http://appworld.blackberry.com/webstore/content/59952277/?lang=fr&countrycode=US&CPID=KNC-kw2112_p13")
+            }
         }
     }
 }

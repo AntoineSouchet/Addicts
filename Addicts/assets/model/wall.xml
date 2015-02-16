@@ -1,0 +1,12 @@
+<model>
+ <header title="Les fonds d'écrans des Addicts">
+    	<item title="Jaune/bleu" image="asset:///wallpapers/wall_1.jpg" />
+    	<item title="Rouge" image="asset:///wallpapers/wall_2.jpg" />
+    	<item title="Vert/Jaune" image="asset:///wallpapers/wall_3.jpg" />
+    	<item title="Bleu/Blanc" image="asset:///wallpapers/wall_4.jpg" />
+    	<item title="Violet" image="asset:///wallpapers/wall_5.jpg" />
+    	<item title="Noir" image="asset:///wallpapers/wall_6.jpg" />
+    	<item title="Blanc" image="asset:///wallpapers/wall_7.jpg" />
+    	<item title="Bleu" image="asset:///wallpapers/wall_8.jpg" />3
+</header>
+</model>

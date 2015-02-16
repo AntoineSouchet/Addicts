@@ -21,9 +21,12 @@
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
 #include <bb/cascades/Image>
-#include <QtNetwork>
+#include <bb/system/InvokeRequest>
+#include <bb/system/InvokeManager>
+
 
 using namespace bb::cascades;
+using namespace bb::system;
 
 ApplicationUI::ApplicationUI() :
         QObject()
@@ -49,7 +52,7 @@ ApplicationUI::ApplicationUI() :
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
 
-
+    qml->setContextProperty("ApplicationUI", this);
 
     // Set created root object as the application scene
     Application::instance()->setScene(root);
@@ -70,6 +73,39 @@ QString ApplicationUI::Maj(QString title)
         title = title[0].toUpper()+title.remove(0,1);
     }
     return title;
+}
+
+void ApplicationUI::twitter(QString url)
+{
+    qDebug() << url;
+    InvokeManager invokeManager;
+    InvokeRequest request;
+
+    // Set the target app
+    request.setTarget("Twitter");
+
+    // Set the action that the target app should execute
+    request.setAction("bb.action.SHARE");
+    request.setData("JE SUIS UN TWEET");
+    // Specify the location of the data
+    request.setUri(QUrl(url));
+    invokeManager.invoke(request);
+}
+
+void ApplicationUI::facebook(QString url)
+{
+    InvokeManager invokeManager;
+    InvokeRequest request;
+
+    // Set the target app
+    request.setTarget("Facebook");
+
+    // Set the action that the target app should execute
+    request.setAction("bb.action.SHARE");
+
+    // Specify the location of the data
+    request.setUri(QUrl(url));
+    invokeManager.invoke(request);
 }
 
 void ApplicationUI::onSystemLanguageChanged()

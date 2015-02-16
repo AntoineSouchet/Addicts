@@ -52,11 +52,11 @@
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
-    <versionNumber>1.0.0</versionNumber>
+    <versionNumber>1.1.1</versionNumber>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
-    <buildId>1</buildId>
+    <buildId>3</buildId>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!-- <versionLabel></versionLabel> -->
@@ -68,15 +68,15 @@
     <!-- <copyright></copyright> -->
 
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
-    <icon>
-       <image>Addicts2.png</image>
-       <image>Addicts.png</image>
-    </icon>
     <splashScreens>
        <image>SplashScreen1.jpg</image>
        <image>SplashScreen2.jpg</image>
        <image>SplashScreen3.jpg</image>
     </splashScreens>
+    <icon>
+       <image>Addicts-&#xe0;-BlackBerry-10-Logo-114-114.png</image>
+       <image>image.png</image>
+    </icon>
     <category>core.media</category>
     <authorId>gYAAgLaNFCiY8kZK2XCWA2emW58</authorId>
     <description>Mobile version of &quot;Addicts &#xe0; Blackberry 10&quot;.&#xD;
@@ -87,8 +87,6 @@ French website of community BB.</description>
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
 
     <initialWindow>
-        <autoOrients>false</autoOrients>
-        <aspectRatio>portrait</aspectRatio>
         <systemChrome>none</systemChrome>
     </initialWindow>
 
@@ -106,6 +104,9 @@ French website of community BB.</description>
     <asset path="C:/Users/AS250818/Documents/Perso/Addicts2.png">Addicts2.png</asset>
     <asset path="C:/Users/AS250818/Documents/Perso/SplashScreen4.jpg">SplashScreen4.jpg</asset>
     <asset path="C:/Users/AS250818/Documents/Perso/Addicts.png">Addicts.png</asset>
+    <asset path="C:/Users/AS250818/Documents/Perso/Addicts-&#xe0;-BlackBerry-10-Logo-1.png">Addicts-&#xe0;-BlackBerry-10-Logo-1.png</asset>
+    <asset path="C:/Users/AS250818/Documents/Perso/Addicts-&#xe0;-BlackBerry-10-Logo-114-114.png">Addicts-&#xe0;-BlackBerry-10-Logo-114-114.png</asset>
+    <asset path="C:/Users/AS250818/Downloads/image.png">image.png</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

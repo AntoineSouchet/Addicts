@@ -18,7 +18,7 @@
 #define ApplicationUI_HPP_
 
 #include <QObject>
-#include <QtNetwork>
+
 
 
 namespace bb
@@ -42,10 +42,16 @@ class ApplicationUI : public QObject
 public:
     ApplicationUI();
     virtual ~ApplicationUI() {}
+    Q_INVOKABLE
+    void twitter(QString);
+    Q_INVOKABLE
+    void facebook(QString);
+    Q_INVOKABLE
+    QString Maj(QString);
 private slots:
     void onSystemLanguageChanged();
     void loadImages(QString);
-    QString Maj(QString);
+
 private:
     QTranslator* m_pTranslator;
     bb::cascades::LocaleHandler* m_pLocaleHandler;

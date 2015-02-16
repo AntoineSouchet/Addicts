@@ -1,5 +1,6 @@
 import bb.cascades 1.2
-import bb.platform 1.0
+
+
 
 Page {
     
@@ -8,33 +9,41 @@ Page {
     }
     Container {
         topPadding: 20
-        background: Color.Black
-        attachedObjects: [
-            HomeScreen {
-                id: myHomeScreen
+        ListView {
+            
+            dataModel: XmlDataModel {
+                source: "model/wall.xml"
+            } 
+            listItemComponents: [
+                ListItemComponent {
+                    type: "header"
+                    Header {
+                        title: ListItemData.title
+                    }
+                },
+                ListItemComponent {
+                    type: "item"
+                    
+                    StandardListItem {
+                        title: ListItemData.title
+                        imageSource: ListItemData.image
+                    }
+                }
+            
+            ]
+            onTriggered: {
+                var selectedItem = dataModel.data(indexPath); 
+                var page = fullPages.createObject();
+                page.imagesource = selectedItem.image
+                nav.push(page);
             }
-        ]
-        
-        ImageView {
-            topPadding: 20
-            imageSource: "asset:///wallpapers/wall_1.jpg"
-            maxHeight: 250
-            maxWidth: 250
-            horizontalAlignment: HorizontalAlignment.Center
-        }
-        Button {
-            text:"Mettre en fond d'écran"
-            horizontalAlignment: HorizontalAlignment.Center
-            onClicked: {
-                myHomeScreen.setWallpaper("asset:///newWallpaper.jpg");
-            }
-        }
-        
-        ImageView {
-            imageSource: "asset:///wallpapers/wall_2.jpg"
-            maxHeight: 250
-            maxWidth: 250
-        }
-        
+        }     
     }
+    attachedObjects: [
+        ComponentDefinition {
+            id: fullPages
+            source: "wallfull.qml"
+        }]
 }
+
+

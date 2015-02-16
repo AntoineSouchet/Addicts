@@ -1,8 +1,12 @@
 1
-37
+46
 Apropos.qml
-detailTeam.qml
+icon/128-facebook.png
+icon/128-twitter.png
+icon/facebook51.png
 icon/twitter.png
+icon/twitter1.png
+icon/twitter39.png
 icon/téléchargement.png
 icon/utube.gif
 images/Addicts.png
@@ -11,9 +15,13 @@ images/ic_contact.png
 images/ic_help.png
 images/ic_resume.png
 images/ic_select.png
+images/ic_share.png
+images/ic_view_image.png
 main.qml
 model/team.xml
+model/wall.xml
 Pref.qml
+share.qml
 team.qml
 teamImages/allan.jpg
 teamImages/antoine.jpg
@@ -29,6 +37,7 @@ teamImages/paolo75.jpg
 teamImages/romain.jpg
 teamImages/stev.jpg
 wall.qml
+wallfull.qml
 wallpapers/wall_1.jpg
 wallpapers/wall_2.jpg
 wallpapers/wall_3.jpg

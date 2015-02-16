@@ -38,8 +38,12 @@ config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/Apropos.qml) \
         $$quote($$BASEDIR/assets/Pref.qml) \
-        $$quote($$BASEDIR/assets/detailTeam.qml) \
+        $$quote($$BASEDIR/assets/icon/128-facebook.png) \
+        $$quote($$BASEDIR/assets/icon/128-twitter.png) \
+        $$quote($$BASEDIR/assets/icon/facebook51.png) \
         $$quote($$BASEDIR/assets/icon/twitter.png) \
+        $$quote($$BASEDIR/assets/icon/twitter1.png) \
+        $$quote($$BASEDIR/assets/icon/twitter39.png) \
         $$quote($$BASEDIR/assets/icon/téléchargement.png) \
         $$quote($$BASEDIR/assets/icon/utube.gif) \
         $$quote($$BASEDIR/assets/images/Addicts.png) \
@@ -48,8 +52,12 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_help.png) \
         $$quote($$BASEDIR/assets/images/ic_resume.png) \
         $$quote($$BASEDIR/assets/images/ic_select.png) \
+        $$quote($$BASEDIR/assets/images/ic_share.png) \
+        $$quote($$BASEDIR/assets/images/ic_view_image.png) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/model/team.xml) \
+        $$quote($$BASEDIR/assets/model/wall.xml) \
+        $$quote($$BASEDIR/assets/share.qml) \
         $$quote($$BASEDIR/assets/team.qml) \
         $$quote($$BASEDIR/assets/teamImages/allan.jpg) \
         $$quote($$BASEDIR/assets/teamImages/antoine.jpg) \
@@ -65,6 +73,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/teamImages/romain.jpg) \
         $$quote($$BASEDIR/assets/teamImages/stev.jpg) \
         $$quote($$BASEDIR/assets/wall.qml) \
+        $$quote($$BASEDIR/assets/wallfull.qml) \
         $$quote($$BASEDIR/assets/wallpapers/wall_1.jpg) \
         $$quote($$BASEDIR/assets/wallpapers/wall_2.jpg) \
         $$quote($$BASEDIR/assets/wallpapers/wall_3.jpg) \

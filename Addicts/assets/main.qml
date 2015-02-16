@@ -16,7 +16,7 @@
 
 import bb.cascades 1.2
 import bb.data 1.0
-
+import bb.system 1.0
 
 NavigationPane {
     
@@ -38,7 +38,6 @@ NavigationPane {
             },
             ActionItem {
                 title: "Préférences"
-
                 onTriggered: {
                     var page = prefPages.createObject();
                     nav.push(page);
@@ -53,6 +52,14 @@ NavigationPane {
                 }
             },
             ActionItem {
+                title: "Personalisation"
+                imageSource: "asset:///images/ic_view_image.png"
+                onTriggered: {
+                    var page = wallPages.createObject();
+                    nav.push(page);
+                }
+            },
+            ActionItem {
                 title: "A propos"
                 imageSource: "asset:///images/ic_help.png"
                 onTriggered: {
@@ -60,8 +67,8 @@ NavigationPane {
                     nav.push(page);
                 }
             }
-            //TODO add ActionItem for Background change
         ] 
+        
     } 
     Page {
         titleBar: TitleBar {
@@ -91,6 +98,9 @@ NavigationPane {
                             else if (ListItemData.categorie == "terminaux") { "<html><span style='color: #2980b9;'>Terminaux</span></html>" }
                             else if (ListItemData.categorie == "applications") { "<html><span style='color: #2980b9;'>Applications</span></html>" }
                             else if (ListItemData.categorie == "opérateurs") { "<html><span style='color: #2980b9;'>Opérateurs</span></html>" }
+                            else if (ListItemData.categorie == "bonsplans") { "<html><span style='color: #2980b9;'>Bon Plans</span></html>" }
+                            else if (ListItemData.categorie == "bbm") { "<html><span style='color: #2980b9;'>BBM</span></html>" }
+                            else if (ListItemData.categorie == "tests") { "<html><span style='color: #2980b9;'>Tests</span></html>" }
                             else ( "<html><span style='color: #2980b9;'>" + ListItemData.categorie + "</span></html>")
                             description: ListItemData.nom
                             status: ListItemData.date  
@@ -103,6 +113,7 @@ NavigationPane {
                     var page = webPage.createObject();
                     page.htmlContent = "<div width='100%' style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;'><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br />" + selectedItem.corps + "</div>";
                     page.titleBar.title = selectedItem.nom
+                    page.urlFromJson = selectedItem.url
                     nav.push(page);
                     
                 }
@@ -114,6 +125,10 @@ NavigationPane {
         ComponentDefinition {
             id: prefPages
             source: "Pref.qml"
+        },
+        ComponentDefinition {
+            id: sharePages
+            source: "share.qml"
         },
         ComponentDefinition {
             id: teamPages
@@ -131,15 +146,24 @@ NavigationPane {
             id: dataModel
             sortedAscending: false
             grouping: ItemGrouping.ByFullValue
+            sortingKeys: ["date"]
         },
         ComponentDefinition {
+
+
             id: webPage
+            
             Page {
+                
                 property alias htmlContent: detailView.html
+                property alias urlFromJson: urlJson.text
+                
                 titleBar: TitleBar {
 
                 }
+                
                 Container {
+                        
                     ActivityIndicator {
                         id: indicatorWeb
                         horizontalAlignment: HorizontalAlignment.Center
@@ -148,11 +172,18 @@ NavigationPane {
                         accessibility.name: "myIndicator"
                         
                     }
+                    Label {
+                        id:urlJson
+                        visible: false
+                        text: ""
+                    }
+
                     ScrollView {
                         topPadding: 10
                         leftPadding: 30
                         rightPadding: 30
                         scrollViewProperties.scrollMode: ScrollMode.Vertical
+
                         WebView {
                             id: detailView; 
                             leftPadding: 30
@@ -176,8 +207,25 @@ NavigationPane {
                         accessibility.name: "ScrollView"
 
                     }
+                    
                 }
+                actions: [
+                    ActionItem {
+                        title: "Partager"
+                        imageSource: "asset:///images/ic_share.png"
+                        ActionBar.placement: ActionBarPlacement.OnBar
+                        onTriggered: {
+
+                            var page = sharePages.createObject();
+                            page.sharingUrl = urlJson.text
+                            page.previewWeb = detailView.html
+                            nav.push(page);
+                        }
+                    }
+                ]
+
             }
+            
         },
         DataSource {
                     id: dataSource
