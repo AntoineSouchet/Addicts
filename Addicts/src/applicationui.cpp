@@ -15,18 +15,19 @@
  */
 
 #include "applicationui.hpp"
+#include "WebImageView.h"
+
 
 #include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
-#include <bb/cascades/Image>
 #include <bb/system/InvokeRequest>
 #include <bb/system/InvokeManager>
 
-
 using namespace bb::cascades;
 using namespace bb::system;
+
 
 ApplicationUI::ApplicationUI() :
         QObject()
@@ -44,7 +45,7 @@ ApplicationUI::ApplicationUI() :
 
     // initial load
     onSystemLanguageChanged();
-
+    qmlRegisterType<WebImageView>("org.labsquare", 1, 0, "WebImageView");
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
@@ -56,39 +57,34 @@ ApplicationUI::ApplicationUI() :
 
     // Set created root object as the application scene
     Application::instance()->setScene(root);
-
-
 }
 
-void ApplicationUI::loadImages(QString url)
-{
-    Image image = Image(QUrl(url));
-}
-
-QString ApplicationUI::Maj(QString title)
-{
-    qDebug() << "Update Title ! ";
-    if (!title.isEmpty())
-    {
-        title = title[0].toUpper()+title.remove(0,1);
-    }
-    return title;
+QByteArray ApplicationUI::encodeQString(const QString& toEncode) const {
+    return toEncode.toUtf8();
 }
 
 void ApplicationUI::twitter(QString url)
 {
-    qDebug() << url;
     InvokeManager invokeManager;
     InvokeRequest request;
 
-    // Set the target app
     request.setTarget("Twitter");
 
-    // Set the action that the target app should execute
     request.setAction("bb.action.SHARE");
-    request.setData("JE SUIS UN TWEET");
-    // Specify the location of the data
+
     request.setUri(QUrl(url));
+    invokeManager.invoke(request);
+}
+
+void ApplicationUI::BBWorld()
+{
+    //appworld://content/3664
+    InvokeManager invokeManager;
+    InvokeRequest request;
+
+    request.setTarget("sys.appworld");
+    request.setAction("bb.action.OPEN");
+    request.setUri(QUrl("appworld://content/59952277"));
     invokeManager.invoke(request);
 }
 
@@ -97,13 +93,10 @@ void ApplicationUI::facebook(QString url)
     InvokeManager invokeManager;
     InvokeRequest request;
 
-    // Set the target app
     request.setTarget("Facebook");
 
-    // Set the action that the target app should execute
     request.setAction("bb.action.SHARE");
 
-    // Specify the location of the data
     request.setUri(QUrl(url));
     invokeManager.invoke(request);
 }
@@ -111,7 +104,7 @@ void ApplicationUI::facebook(QString url)
 void ApplicationUI::onSystemLanguageChanged()
 {
     QCoreApplication::instance()->removeTranslator(m_pTranslator);
-    // Initiate, load and install the application translation files.
+
     QString locale_string = QLocale().name();
     QString file_name = QString("Addicts_%1").arg(locale_string);
     if (m_pTranslator->load(file_name, "app/native/qm")) {

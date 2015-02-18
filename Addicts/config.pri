@@ -36,20 +36,14 @@ simulator {
 
 config_pri_assets {
     OTHER_FILES += \
-        $$quote($$BASEDIR/assets/Apropos.qml) \
-        $$quote($$BASEDIR/assets/Pref.qml) \
+        $$quote($$BASEDIR/assets/aPropos.qml) \
         $$quote($$BASEDIR/assets/icon/128-facebook.png) \
         $$quote($$BASEDIR/assets/icon/128-twitter.png) \
-        $$quote($$BASEDIR/assets/icon/facebook51.png) \
-        $$quote($$BASEDIR/assets/icon/twitter.png) \
-        $$quote($$BASEDIR/assets/icon/twitter1.png) \
-        $$quote($$BASEDIR/assets/icon/twitter39.png) \
-        $$quote($$BASEDIR/assets/icon/téléchargement.png) \
-        $$quote($$BASEDIR/assets/icon/utube.gif) \
         $$quote($$BASEDIR/assets/images/Addicts.png) \
-        $$quote($$BASEDIR/assets/images/background.png) \
+        $$quote($$BASEDIR/assets/images/ic_add_bookmarks.png) \
         $$quote($$BASEDIR/assets/images/ic_contact.png) \
         $$quote($$BASEDIR/assets/images/ic_help.png) \
+        $$quote($$BASEDIR/assets/images/ic_home.png) \
         $$quote($$BASEDIR/assets/images/ic_resume.png) \
         $$quote($$BASEDIR/assets/images/ic_select.png) \
         $$quote($$BASEDIR/assets/images/ic_share.png) \
@@ -57,6 +51,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/model/team.xml) \
         $$quote($$BASEDIR/assets/model/wall.xml) \
+        $$quote($$BASEDIR/assets/pref.qml) \
         $$quote($$BASEDIR/assets/share.qml) \
         $$quote($$BASEDIR/assets/team.qml) \
         $$quote($$BASEDIR/assets/teamImages/allan.jpg) \
@@ -86,10 +81,13 @@ config_pri_assets {
 
 config_pri_source_group1 {
     SOURCES += \
+        $$quote($$BASEDIR/src/WebImageView.cpp) \
         $$quote($$BASEDIR/src/applicationui.cpp) \
         $$quote($$BASEDIR/src/main.cpp)
 
-    HEADERS += $$quote($$BASEDIR/src/applicationui.hpp)
+    HEADERS += \
+        $$quote($$BASEDIR/src/WebImageView.h) \
+        $$quote($$BASEDIR/src/applicationui.hpp)
 }
 
 CONFIG += precompile_header

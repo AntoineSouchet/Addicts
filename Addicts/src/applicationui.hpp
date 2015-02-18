@@ -18,7 +18,7 @@
 #define ApplicationUI_HPP_
 
 #include <QObject>
-
+#include <QtNetwork>
 
 
 namespace bb
@@ -47,10 +47,12 @@ public:
     Q_INVOKABLE
     void facebook(QString);
     Q_INVOKABLE
-    QString Maj(QString);
+    void BBWorld();
+    Q_INVOKABLE
+    QByteArray encodeQString(const QString& toEncode) const;
 private slots:
     void onSystemLanguageChanged();
-    void loadImages(QString);
+
 
 private:
     QTranslator* m_pTranslator;

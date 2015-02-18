@@ -31,20 +31,21 @@ static const uint qt_meta_data_ApplicationUI[] = {
 
  // slots: signature, parameters, type, tag, flags
       15,   14,   14,   14, 0x08,
-      41,   14,   14,   14, 0x08,
 
  // methods: signature, parameters, type, tag, flags
-      61,   14,   14,   14, 0x02,
-      78,   14,   14,   14, 0x02,
-     104,   14,   96,   14, 0x02,
+      41,   14,   14,   14, 0x02,
+      58,   14,   14,   14, 0x02,
+      76,   14,   14,   14, 0x02,
+     106,   97,   86,   14, 0x02,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_ApplicationUI[] = {
     "ApplicationUI\0\0onSystemLanguageChanged()\0"
-    "loadImages(QString)\0twitter(QString)\0"
-    "facebook(QString)\0QString\0Maj(QString)\0"
+    "twitter(QString)\0facebook(QString)\0"
+    "BBWorld()\0QByteArray\0toEncode\0"
+    "encodeQString(QString)\0"
 };
 
 void ApplicationUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -54,11 +55,11 @@ void ApplicationUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         ApplicationUI *_t = static_cast<ApplicationUI *>(_o);
         switch (_id) {
         case 0: _t->onSystemLanguageChanged(); break;
-        case 1: _t->loadImages((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 2: _t->twitter((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: _t->facebook((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 4: { QString _r = _t->Maj((*reinterpret_cast< QString(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
+        case 1: _t->twitter((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 2: _t->facebook((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 3: _t->BBWorld(); break;
+        case 4: { QByteArray _r = _t->encodeQString((*reinterpret_cast< const QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = _r; }  break;
         default: ;
         }
     }

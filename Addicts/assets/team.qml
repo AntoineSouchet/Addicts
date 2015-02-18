@@ -8,6 +8,7 @@ Page {
         title : "Equipe des Addicts"
     }
     content: Container {
+        
         ListView {
       
             dataModel: XmlDataModel {
@@ -45,4 +46,15 @@ Page {
             }
         ]      
     }
+    actions: [
+        ActionItem {
+            title: "Accueil"
+            imageSource: "asset:///images/ic_home.png"
+            ActionBar.placement: ActionBarPlacement.OnBar
+            onTriggered: {
+                nav.navigateTo(firstPage);
+                //nav.po
+            }
+        }
+        ]
 }

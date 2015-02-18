@@ -26,6 +26,7 @@ Page {
                 }       
                 else {
                     Application.themeSupport.setVisualStyle(VisualStyle.Bright);
+
                 }
             }
         }

@@ -35,7 +35,7 @@ Page {
             imageSource: "asset:///icon/128-twitter.png"
             text: "Twitter"
             onClicked: {
-                ApplicationUI.twitter("http://www.blackberry-10.fr/article- " + sharingUrl.text)
+                ApplicationUI.twitter("http://www.blackberry-10.fr/article-" + sharingUrl.text)
             }
         }
     }
