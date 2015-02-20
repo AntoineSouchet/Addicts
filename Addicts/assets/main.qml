@@ -19,9 +19,10 @@ import bb.data 1.0
 import bb.system 1.0
 import org.labsquare 1.0
 
+
 NavigationPane {
     
-    
+
     id: nav
     Menu.definition: MenuDefinition {
         
@@ -64,6 +65,7 @@ NavigationPane {
         ] 
         
     } 
+
     Page {
         id:firstPage
         
@@ -71,9 +73,13 @@ NavigationPane {
             title : "Addicts"
         }
 
-        
+
+
         Container {
- 
+
+            id: firstContent
+            
+            
             ActivityIndicator {
                 id: myIndicator
                 horizontalAlignment: HorizontalAlignment.Center
@@ -81,6 +87,12 @@ NavigationPane {
                 minWidth: 200
                 accessibility.name: "myIndicator"
             }
+            Label {
+                id:articlefirst
+                text:"1"
+            }
+
+            
             ListView {
                 id:listViewStat
                 dataModel: dataModel
@@ -88,41 +100,40 @@ NavigationPane {
                     
                 }
                 listItemComponents: [
+
+
                     ListItemComponent {
                         type: "item"
-                        
-                        
+
                         content: Container {
+
                             
                             Divider {
                                 verticalAlignment: VerticalAlignment.Bottom
                                 horizontalAlignment: HorizontalAlignment.Center  
                             }
-//                            Label {
-//                                text:if (ListItemData.categorie == "actualites") { "<html><span style='color: #2980b9;'>Actualités</span></html>" } 
-//                                else if (ListItemData.categorie == "ecosysteme") { "<html><span style='color: #2980b9;'>EcoSysteme</span></html>" }
-//                                else if (ListItemData.categorie == "terminaux") { "<html><span style='color: #2980b9;'>Terminaux</span></html>" }
-//                                else if (ListItemData.categorie == "applications") { "<html><span style='color: #2980b9;'>Applications</span></html>" }
-//                                else if (ListItemData.categorie == "opérateurs") { "<html><span style='color: #2980b9;'>Opérateurs</span></html>" }
-//                                else if (ListItemData.categorie == "bonsplans") { "<html><span style='color: #2980b9;'>Bon Plans</span></html>" }
-//                                else if (ListItemData.categorie == "bbm") { "<html><span style='color: #2980b9;'>BBM</span></html>" }
-//                                else if (ListItemData.categorie == "tests") { "<html><span style='color: #2980b9;'>Tests</span></html>" }
-//                                else ( "<html><span style='color: #2980b9;'>" + ListItemData.categorie + "</span></html>")
-//                                horizontalAlignment: HorizontalAlignment.Center  
-//                            }
 //                            layout: StackLayout {
 //                                orientation: LayoutOrientation.LeftToRight
 //                            }
+
+                            Label {
+                                id:idArticle
+                                text:""
+                            }
                             WebImageView {
                                 url: ListItemData.image
-//                                preferredHeight: 110; preferredWidth: 110
+                                id: webImageView
+
                                 verticalAlignment: VerticalAlignment.Center
                                 horizontalAlignment: HorizontalAlignment.Center
 //                                maxHeight: 150
-//                                maxWidth: 300   
-//                                minWidth: 300 
+                                property int i;
+                                //minHeight: if(ListItemData.id == dataModel.i) { console.log(ListItemData[0].id); 500 }
+
+//                                minWidth: if(i==0) { i =i +1; 10; } 
+//                                maxHeight: if(i==0) { i =i +1; 10; } 
+//                                maxWidth: if(i==0) { i =i +1; 10; } 
                             }
-                            //bottomPadding: 10
                             Label {
                                 leftMargin: 5
                                 text:"<html><span style='font-size:7;margin-left:5px;'>" + ListItemData.nom + "</span></html>"
@@ -135,27 +146,10 @@ NavigationPane {
                             }
                             Divider {
                                 verticalAlignment: VerticalAlignment.Bottom
-                                horizontalAlignment: HorizontalAlignment.Center  
-                                
+                                horizontalAlignment: HorizontalAlignment.Center          
                             }
-                        }
-                        
-//                        StandardListItem {      
-//                            imageSource: ListItemData.image
 
-//                            title: if (ListItemData.categorie == "actualites") { "<html><span style='color: #2980b9;'>Actualités</span></html>" } 
-//                            else if (ListItemData.categorie == "ecosysteme") { "<html><span style='color: #2980b9;'>EcoSysteme</span></html>" }
-//                            else if (ListItemData.categorie == "terminaux") { "<html><span style='color: #2980b9;'>Terminaux</span></html>" }
-//                            else if (ListItemData.categorie == "applications") { "<html><span style='color: #2980b9;'>Applications</span></html>" }
-//                            else if (ListItemData.categorie == "opérateurs") { "<html><span style='color: #2980b9;'>Opérateurs</span></html>" }
-//                            else if (ListItemData.categorie == "bonsplans") { "<html><span style='color: #2980b9;'>Bon Plans</span></html>" }
-//                            else if (ListItemData.categorie == "bbm") { "<html><span style='color: #2980b9;'>BBM</span></html>" }
-//                            else if (ListItemData.categorie == "tests") { "<html><span style='color: #2980b9;'>Tests</span></html>" }
-//                            else ( "<html><span style='color: #2980b9;'>" + ListItemData.categorie + "</span></html>")
-//                            description: ListItemData.nom
-//                            status: ListItemData.date  
-//                        
-//                        }  
+                        }
                     }
                 ]
                 onTriggered: {
@@ -168,8 +162,8 @@ NavigationPane {
                     }
                     else if (Application.themeSupport.theme.colorTheme.style == 2)
                     {
-                    page.htmlContent = "<div width='100%' style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;background-color:black;'><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:white';>" + selectedItem.corps + "</span></div>";
-                    
+                    //page.htmlContent = "<div width='100%' style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;background-color:black;'><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:white';>" + selectedItem.corps + "</span></div>";
+                        page.htmlContent = "<html><div width='100%' style='background-color:black;'>okXXX</div></html>"
                     }
                     else {
                         page.htmlContent = "<div width='100%' style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;'><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br />" + selectedItem.corps + "</div>";
@@ -240,6 +234,7 @@ NavigationPane {
         GroupDataModel {
             id: dataModel
             sortedAscending: false
+            property int i;
             grouping: ItemGrouping.ByFullValue
             sortingKeys: ["date"]
         },
@@ -250,8 +245,6 @@ NavigationPane {
                 
                 property alias htmlContent: detailView.html
                 property alias urlFromJson: urlJson.text
-
-//                property alias titleFromJson: titleFromJson.text
                 
                 titleBar: TitleBar {
                     id:titleBarArticle
@@ -313,8 +306,6 @@ NavigationPane {
                     
                 }
                 actions: [
-                    // General SHARE Framework call
-                    // Will display all the SHARE Targets available
                     InvokeActionItem {
                         ActionBar.placement: ActionBarPlacement.OnBar
                         query {
@@ -350,8 +341,29 @@ NavigationPane {
                     type: DataSourceType.Json
                     remote: true
                     onDataLoaded: {
-                        dataModel.clear();
+                        
+                        dataModel.clear(); 
+                        var Max = 0;
+                        
+                        function setMax()
+                        {
+                            var i = 0;
+                            var idFirstArticle = 0;
+                            while (i < 10)
+                            {
+                                if (i == 0)
+                                {
+                                    idFirstArticle = data[i].id
+                                }
+                                i = i + 1;
+                            }
+                            return idFirstArticle;
+                        }
+                        //monIdArticle = setMax();
+                        articlefirst.text = setMax();
+
                         dataModel.insertList(data);
+                       
                         myIndicator.stop();
                     }
         }   
@@ -361,6 +373,7 @@ NavigationPane {
     }
     onCreationCompleted: {
         myIndicator.start();
+
         dataSource.load();
     }
 }

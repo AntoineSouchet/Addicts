@@ -12,24 +12,17 @@ Page {
                 
                 horizontalAlignment: HorizontalAlignment.Center
             }
-            
-        Button {
-            imageSource: "asset:///images/ic_select.png"
-            
-            horizontalAlignment: HorizontalAlignment.Center
-            text: "Switcher (10.3 uniquement)"
-            verticalAlignment: VerticalAlignment.Center
-            // Checks the current theme and then flips the value
-            onClicked: {
-                if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
-                    Application.themeSupport.setVisualStyle(VisualStyle.Dark);
-                }       
-                else {
-                    Application.themeSupport.setVisualStyle(VisualStyle.Bright);
-
+            ToggleButton {
+                onCheckedChanged: {
+                    // Control your task
+                    if (checked) {
+                        Application.themeSupport.setVisualStyle(VisualStyle.Dark);
+                    } else {
+                        Application.themeSupport.setVisualStyle(VisualStyle.Bright);
+                    }
                 }
             }
-        }
+
         Label {
             topPadding: 60
             topMargin: 60

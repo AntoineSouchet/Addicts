@@ -41,6 +41,7 @@ class ApplicationUI : public QObject
     Q_OBJECT
 public:
     ApplicationUI();
+    int first;
     virtual ~ApplicationUI() {}
     Q_INVOKABLE
     void twitter(QString);
@@ -50,6 +51,7 @@ public:
     void BBWorld();
     Q_INVOKABLE
     QByteArray encodeQString(const QString& toEncode) const;
+
 private slots:
     void onSystemLanguageChanged();
 

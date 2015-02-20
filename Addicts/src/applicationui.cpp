@@ -52,7 +52,7 @@ ApplicationUI::ApplicationUI() :
 
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
-
+    first = 0;
     qml->setContextProperty("ApplicationUI", this);
 
     // Set created root object as the application scene
@@ -75,6 +75,7 @@ void ApplicationUI::twitter(QString url)
     request.setUri(QUrl(url));
     invokeManager.invoke(request);
 }
+
 
 void ApplicationUI::BBWorld()
 {
