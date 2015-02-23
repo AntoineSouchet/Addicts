@@ -22,7 +22,7 @@ static const uint qt_meta_data_ApplicationUI[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,7 +36,8 @@ static const uint qt_meta_data_ApplicationUI[] = {
       41,   14,   14,   14, 0x02,
       58,   14,   14,   14, 0x02,
       76,   14,   14,   14, 0x02,
-     106,   97,   86,   14, 0x02,
+      94,   14,   86,   14, 0x02,
+     122,  113,  102,   14, 0x02,
 
        0        // eod
 };
@@ -44,8 +45,8 @@ static const uint qt_meta_data_ApplicationUI[] = {
 static const char qt_meta_stringdata_ApplicationUI[] = {
     "ApplicationUI\0\0onSystemLanguageChanged()\0"
     "twitter(QString)\0facebook(QString)\0"
-    "BBWorld()\0QByteArray\0toEncode\0"
-    "encodeQString(QString)\0"
+    "BBWorld()\0QString\0getID()\0QByteArray\0"
+    "toEncode\0encodeQString(QString)\0"
 };
 
 void ApplicationUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -58,7 +59,9 @@ void ApplicationUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 1: _t->twitter((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->facebook((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: _t->BBWorld(); break;
-        case 4: { QByteArray _r = _t->encodeQString((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 4: { QString _r = _t->getID();
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
+        case 5: { QByteArray _r = _t->encodeQString((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = _r; }  break;
         default: ;
         }
@@ -97,9 +100,9 @@ int ApplicationUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

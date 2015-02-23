@@ -11,8 +11,11 @@ Page {
                 text : "<html><b>Changer le théme de l'application</b></html>"
                 
                 horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
             }
             ToggleButton {
+                horizontalAlignment: HorizontalAlignment.Center
+                id: toggleButton
                 onCheckedChanged: {
                     // Control your task
                     if (checked) {
@@ -21,10 +24,10 @@ Page {
                         Application.themeSupport.setVisualStyle(VisualStyle.Bright);
                     }
                 }
+                
             }
 
         Label {
-            topPadding: 60
             topMargin: 60
             horizontalAlignment: HorizontalAlignment.Center
             text: "<html><b>Supprimer le cache de l'application</b></html>"
@@ -42,6 +45,12 @@ Page {
             onClicked: {
                 cacheToast.show()
             }
+        }
+    }
+    onCreationCompleted: {
+        if (Application.themeSupport.theme.colorTheme.style == 2)
+        {
+            toggleButton.checked = true;
         }
     }
 }

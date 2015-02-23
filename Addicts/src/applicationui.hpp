@@ -50,6 +50,8 @@ public:
     Q_INVOKABLE
     void BBWorld();
     Q_INVOKABLE
+    QString getID();
+    Q_INVOKABLE
     QByteArray encodeQString(const QString& toEncode) const;
 
 private slots:

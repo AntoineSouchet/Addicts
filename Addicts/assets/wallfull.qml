@@ -8,6 +8,7 @@ Page {
         background: Color.Black
         ImageView {
             id: fullwall
+            
         }
         attachedObjects: [
             HomeScreen {

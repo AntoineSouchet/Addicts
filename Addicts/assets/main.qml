@@ -20,13 +20,13 @@ import bb.system 1.0
 import org.labsquare 1.0
 
 
+
 NavigationPane {
     
 
+    
     id: nav
-    Menu.definition: MenuDefinition {
-        
-        
+    Menu.definition: MenuDefinition {        
         actions: [
             ActionItem {
                 title: "Accueil"
@@ -46,7 +46,6 @@ NavigationPane {
                     nav.push(page);
                 }
             },
-            
             ActionItem {
                 title: "A propos"
                 imageSource: "asset:///images/ic_help.png"
@@ -63,23 +62,15 @@ NavigationPane {
                 }
             }
         ] 
-        
     } 
-
     Page {
-        id:firstPage
-        
+        id:firstPage  
         titleBar: TitleBar {
             title : "Addicts"
         }
-
-
-
         Container {
-
             id: firstContent
-            
-            
+            layout: DockLayout {} 
             ActivityIndicator {
                 id: myIndicator
                 horizontalAlignment: HorizontalAlignment.Center
@@ -87,62 +78,56 @@ NavigationPane {
                 minWidth: 200
                 accessibility.name: "myIndicator"
             }
-            Label {
-                id:articlefirst
-                text:"1"
-            }
-
-            
             ListView {
                 id:listViewStat
-                dataModel: dataModel
-                onCreationCompleted: {
-                    
-                }
+                dataModel: dataModel 
                 listItemComponents: [
-
-
                     ListItemComponent {
                         type: "item"
-
                         content: Container {
-
-                            
+                            preferredHeight: if(ListItemData.id != Qt.test) { 200; }
                             Divider {
                                 verticalAlignment: VerticalAlignment.Bottom
                                 horizontalAlignment: HorizontalAlignment.Center  
                             }
-//                            layout: StackLayout {
-//                                orientation: LayoutOrientation.LeftToRight
-//                            }
-
-                            Label {
-                                id:idArticle
-                                text:""
+                            layout: StackLayout {
+                                orientation: if (ListItemData.id != Qt.test) { LayoutOrientation.LeftToRight } 
                             }
-                            WebImageView {
-                                url: ListItemData.image
-                                id: webImageView
+                        ImageArticle {
+                                id: imageArticle
 
-                                verticalAlignment: VerticalAlignment.Center
                                 horizontalAlignment: HorizontalAlignment.Center
-//                                maxHeight: 150
-                                property int i;
-                                //minHeight: if(ListItemData.id == dataModel.i) { console.log(ListItemData[0].id); 500 }
+                                verticalAlignment: VerticalAlignment.Center
+                                urliamge:ListItemData.image
+                                titre: ListItemData.nom
+                                visible: if(ListItemData.id != Qt.test) { false; } else { true; }
+                                }
+                        WebImageView {
+                                id: imageView
+                                url: ListItemData.image
+                                preferredWidth: 325
+                                scalingMethod: ScalingMethod.AspectFit
+                                verticalAlignment: VerticalAlignment.Center
+                                minWidth: 325
+                                maxWidth: 325
+                                topMargin: 15
 
-//                                minWidth: if(i==0) { i =i +1; 10; } 
-//                                maxHeight: if(i==0) { i =i +1; 10; } 
-//                                maxWidth: if(i==0) { i =i +1; 10; } 
-                            }
+                                visible: if(ListItemData.id != Qt.test) { true; } else { false; }
+                        }
+                        
+                        Label {
+                            id: articleText
+                            visible: if(ListItemData.id != Qt.test) { true; } else { false; }
+                            multiline: true
+                            verticalAlignment: VerticalAlignment.Center
+                            text: ListItemData.nom
+                        }
+                        
                             Label {
-                                leftMargin: 5
-                                text:"<html><span style='font-size:7;margin-left:5px;'>" + ListItemData.nom + "</span></html>"
-                               // multiline: true
-                            }
-                            Label {
-                                horizontalAlignment: HorizontalAlignment.Right
+                                horizontalAlignment: if(ListItemData.id != Qt.test) { HorizontalAlignment.Left; } else { HorizontalAlignment.Right; }
+                                verticalAlignment: VerticalAlignment.Bottom
                                 text: "<html><span style='color: #2980b9;font-size:5;'><b>Rédigé par " + ListItemData.auteur +".</b></span></html>"
-                                
+
                             }
                             Divider {
                                 verticalAlignment: VerticalAlignment.Bottom
@@ -152,63 +137,69 @@ NavigationPane {
                         }
                     }
                 ]
+                onCreationCompleted: {
+
+                    console.log("Valeur " + Qt.test);
+                
+                } 
                 onTriggered: {
                     var selectedItem = dataModel.data(indexPath);
-                    var page = webPage.createObject();
+                    var page = articlePages.createObject();
+                    
                     if (Application.themeSupport.theme.colorTheme.style == 1)
                     {
-                        page.htmlContent = "<div width='100%' style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;'><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br />" + selectedItem.corps + "</div>";
-                    
+                        page.contenu = "<body style=\"height: 100%;style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;\"><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:black';>" + selectedItem.corps + "</span></body>";             
                     }
                     else if (Application.themeSupport.theme.colorTheme.style == 2)
                     {
-                    //page.htmlContent = "<div width='100%' style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;background-color:black;'><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:white';>" + selectedItem.corps + "</span></div>";
-                        page.htmlContent = "<html><div width='100%' style='background-color:black;'>okXXX</div></html>"
+                        page.contenu = "<body style=\"height: 100%;background-color:black;style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;\"><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:white';>" + selectedItem.corps + "</span></body>";
                     }
-                    else {
-                        page.htmlContent = "<div width='100%' style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;'><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br />" + selectedItem.corps + "</div>";
-                    }
-                   page.titleBar.title = selectedItem.nom
-                    page.urlFromJson = selectedItem.url
+                    page.titlearticle = selectedItem.nom
+                    page.titlejson = selectedItem.nom
+                    page.urljson = selectedItem.url
 
-                   // page.titleFromJson = selectedItem.nom
                     nav.push(page);
                     
                 }
                 accessibility.name: "FirstListView"
             }    
+            
+            Label {
+                id:articlefirst
+                text:"1"
+                visible: false
+            }
         }
-        actions: [
-                            
-                            ActionItem {
-                                title: "Accueil"
-                                imageSource: "asset:///images/ic_home.png"
-                                ActionBar.placement: ActionBarPlacement.OnBar
-                                onTriggered: {
-                                    myIndicator.start();
-                                    dataSource.load();
-                                    myIndicator.stop();
-                                    nav.navigateTo(firstPage);
-                                    //nav.po
-                                }
-                            },
-                            ActionItem {
-                                title: "Equipes"
-                                imageSource: "asset:///images/ic_contact.png"
-                                onTriggered: {
-                                    var page = teamPages.createObject();
-                                    nav.push(page);
-                                }
-                            },
-                            ActionItem {
-                                title: "Personalisation"
-                                imageSource: "asset:///images/ic_view_image.png"
-                                onTriggered: {
-                                    var page = wallPages.createObject();
-                                    nav.push(page);
-                                }
-                            }
-                        ]
+        actions: [                         
+           ActionItem {
+               title: "Accueil"
+               imageSource: "asset:///images/ic_home.png"
+               ActionBar.placement: ActionBarPlacement.OnBar
+               onTriggered: {
+                   myIndicator.start();
+                   dataSource.load();
+                   myIndicator.stop();
+                   nav.navigateTo(firstPage);
+                   //nav.po
+               }
+           },
+           ActionItem {
+               title: "Equipes"
+               imageSource: "asset:///images/ic_contact.png"
+               onTriggered: {
+                   var page = teamPages.createObject();
+                   nav.push(page);
+               }
+           },
+           ActionItem {
+               title: "Personalisation"
+               imageSource: "asset:///images/ic_view_image.png"
+               onTriggered: {
+                   var page = wallPages.createObject();
+                   nav.push(page);
+               }
+           }
+       ]
     }
     attachedObjects: [
         ComponentDefinition {
@@ -231,109 +222,16 @@ NavigationPane {
             id: proposPages
             source: "aPropos.qml"
         },
+        ComponentDefinition {
+            id: articlePages
+            source: "articleWebView.qml"
+        },
         GroupDataModel {
             id: dataModel
             sortedAscending: false
             property int i;
             grouping: ItemGrouping.ByFullValue
-            sortingKeys: ["date"]
-        },
-        ComponentDefinition {
-            id: webPage     
-               
-            Page {
-                
-                property alias htmlContent: detailView.html
-                property alias urlFromJson: urlJson.text
-                
-                titleBar: TitleBar {
-                    id:titleBarArticle
-                }
-                
-                Container {
-
-                    ActivityIndicator {
-                        id: indicatorWeb
-                        horizontalAlignment: HorizontalAlignment.Center
-                        minHeight: 100
-                        minWidth: 100
-                        accessibility.name: "myIndicator"
-                        
-                    }
-                    Label {
-                        id:urlJson
-                        visible: false
-                        text: ""
-                    }
-                    Label {
-                        id:titleJson
-                        visible: false
-                        text: ""
-                    }
-
-                    ScrollView {
-                        
-                        topPadding: 0
-                        leftPadding: 0
-                        rightPadding: 0
-//                        scrollViewProperties.scrollMode: ScrollMode.Vertical
-                            
-                        WebView {
-                            
-                            id: detailView; 
-                            leftPadding: 0
-                            rightPadding: 0
-                            
-                            onLoadingChanged: {
-                                if (loadRequest.status ==  WebLoadStatus.Started ) {
-                                    indicatorWeb.start();
-                                    detailView.visible = false;
-                                }
-                                else if (loadRequest.status ==  WebLoadStatus.Succeeded ) {
-                                    indicatorWeb.stop();
-                                    detailView.visible = true;
-                                }
-                                else if (loadRequest.status ==  WebLoadStatus.Failed ) {
-                                    indicatorWeb.stop();
-                                    detailView.html = "<b>Impossible de charger la page, vérifiez votre connection Internet.</b>"
-                                }
-                            }
-                            accessibility.name: "WebView"
-                        }
-                        accessibility.name: "ScrollView"
-
-                    }
-                    
-                }
-                actions: [
-                    InvokeActionItem {
-                        ActionBar.placement: ActionBarPlacement.OnBar
-                        query {
-                            mimeType: "text/plain"
-                            invokeActionId: "bb.action.SHARE"
-                        }
-                        onTriggered: {
-                            data = ApplicationUI.encodeQString(titleBarArticle.title + " http://www.blackberry-10.fr/article-" + urlJson.text + " Partagé via l'application Addicts.");
-                        }
-                    }
-                ]
-//                actions: [
-//                    ActionItem {
-//                        title: "Partager"
-//                        imageSource: "asset:///images/ic_share.png"
-//                        ActionBar.placement: ActionBarPlacement.OnBar
-//                        onTriggered: {
-//
-//                            var page = sharePages.createObject();
-//                            page.sharingUrl = urlJson.text
-//                            page.previewWeb = detailView.html
-//                            nav.push(page);
-//                        }
-//                    }
-//                ]
-
-            }
-            
+            sortingKeys: ["date","id"]
         },
         DataSource {
                     id: dataSource
@@ -361,6 +259,7 @@ NavigationPane {
                         }
                         //monIdArticle = setMax();
                         articlefirst.text = setMax();
+                        Qt.test = setMax();
 
                         dataModel.insertList(data);
                        

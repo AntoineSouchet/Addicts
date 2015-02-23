@@ -112,3 +112,13 @@ void ApplicationUI::onSystemLanguageChanged()
         QCoreApplication::instance()->installTranslator(m_pTranslator);
     }
 }
+
+QString ApplicationUI::getID()
+{
+    return "1";
+}
+
+//void ApplicationUI::setID()
+//{
+//
+//}

@@ -36,7 +36,9 @@ simulator {
 
 config_pri_assets {
     OTHER_FILES += \
+        $$quote($$BASEDIR/assets/ImageArticle.qml) \
         $$quote($$BASEDIR/assets/aPropos.qml) \
+        $$quote($$BASEDIR/assets/articleWebView.qml) \
         $$quote($$BASEDIR/assets/icon/128-facebook.png) \
         $$quote($$BASEDIR/assets/icon/128-twitter.png) \
         $$quote($$BASEDIR/assets/images/Addicts.png) \
