@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import bb.cascades 1.2
+import bb.cascades 1.3
 import bb.data 1.0
 import bb.system 1.0
 import org.labsquare 1.0
@@ -36,7 +36,7 @@ NavigationPane {
                     dataSource.load();
                     myIndicator.stop();
                     nav.navigateTo(firstPage);
-                    //nav.po
+
                 }
             },
             ActionItem {
@@ -63,14 +63,36 @@ NavigationPane {
             }
         ] 
     } 
+    
     Page {
         id:firstPage  
         titleBar: TitleBar {
             title : "Addicts"
         }
+        
         Container {
             id: firstContent
-            layout: DockLayout {} 
+            TextField {
+            id:searchText
+            hintText: "Saissiez votre recherche ici"    
+            visible: false
+
+            input {
+                submitKey: SubmitKey.Search
+                onSubmitted: {
+                    var recherche = searchText.text;
+                    var urlSearch = 'http://www.blackberry-10.fr/jsonfile_search.php?query=' + recherche;
+                    dataSource.setSource(urlSearch);
+                    //dataModel.clear();
+                    dataSource.load();
+                    
+
+                    seekResearch.title = "Accueil"
+                    seekResearch.imageSource = "asset:///images/ic_home.png"
+                }
+            }
+            }
+            
             ActivityIndicator {
                 id: myIndicator
                 horizontalAlignment: HorizontalAlignment.Center
@@ -84,12 +106,11 @@ NavigationPane {
                 listItemComponents: [
                     ListItemComponent {
                         type: "item"
+                        
                         content: Container {
                             preferredHeight: if(ListItemData.id != Qt.test) { 200; }
-                            Divider {
-                                verticalAlignment: VerticalAlignment.Bottom
-                                horizontalAlignment: HorizontalAlignment.Center  
-                            }
+                            leftMargin: 0
+                            leftPadding: 0
                             layout: StackLayout {
                                 orientation: if (ListItemData.id != Qt.test) { LayoutOrientation.LeftToRight } 
                             }
@@ -100,17 +121,20 @@ NavigationPane {
                                 verticalAlignment: VerticalAlignment.Center
                                 urliamge:ListItemData.image
                                 titre: ListItemData.nom
+                                auteur: if(ListItemData.id != Qt.test) { "" } else { "Rédigé par " + ListItemData.auteur +"." }
                                 visible: if(ListItemData.id != Qt.test) { false; } else { true; }
                                 }
                         WebImageView {
                                 id: imageView
                                 url: ListItemData.image
-                                preferredWidth: 325
+
                                 scalingMethod: ScalingMethod.AspectFit
                                 verticalAlignment: VerticalAlignment.Center
+                                leftMargin: 0
+                                preferredWidth: 325
                                 minWidth: 325
                                 maxWidth: 325
-                                topMargin: 15
+
 
                                 visible: if(ListItemData.id != Qt.test) { true; } else { false; }
                         }
@@ -126,6 +150,7 @@ NavigationPane {
                             Label {
                                 horizontalAlignment: if(ListItemData.id != Qt.test) { HorizontalAlignment.Left; } else { HorizontalAlignment.Right; }
                                 verticalAlignment: VerticalAlignment.Bottom
+                                visible: if(ListItemData.id != Qt.test) { true } else { false }
                                 text: "<html><span style='color: #2980b9;font-size:5;'><b>Rédigé par " + ListItemData.auteur +".</b></span></html>"
 
                             }
@@ -138,30 +163,39 @@ NavigationPane {
                     }
                 ]
                 onCreationCompleted: {
-
-                    console.log("Valeur " + Qt.test);
-                
+                    searchText.visible = false
                 } 
                 onTriggered: {
+                    searchText.visible = false
                     var selectedItem = dataModel.data(indexPath);
                     var page = articlePages.createObject();
                     
                     if (Application.themeSupport.theme.colorTheme.style == 1)
                     {
-                        page.contenu = "<body style=\"height: 100%;style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;\"><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:black';>" + selectedItem.corps + "</span></body>";             
+                    page.contenu = "<body style=\"height: 100%;style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;\"><center><img src=\"" + selectedItem.image + "\"></center><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:black';text-justify: inter-word;text-align: justify;><div style=\"text-align: justify\">" + selectedItem.corps + "</div></span></body>";             
                     }
                     else if (Application.themeSupport.theme.colorTheme.style == 2)
                     {
-                        page.contenu = "<body style=\"height: 100%;background-color:black;style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;\"><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:white';>" + selectedItem.corps + "</span></body>";
+                        page.contenu = "<body style=\"height: 100%;background-color:black;style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;\"><img src=\"" + selectedItem.image + "\"><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:white';><div style=\"text-align: justify\">" + selectedItem.corps + "</div></span></body>";
                     }
                     page.titlearticle = selectedItem.nom
                     page.titlejson = selectedItem.nom
                     page.urljson = selectedItem.url
-
+//                    page.urlimg = selectedItem.image
                     nav.push(page);
                     
                 }
                 accessibility.name: "FirstListView"
+                onFocusedChanged: {
+                    searchText.visible = false
+                }
+                onScaleYChanged: {
+                    searchText.visible = false
+                }
+                onTouch: {
+                    searchText.visible = false
+                    
+                }
             }    
             
             Label {
@@ -172,15 +206,30 @@ NavigationPane {
         }
         actions: [                         
            ActionItem {
-               title: "Accueil"
-               imageSource: "asset:///images/ic_home.png"
-               ActionBar.placement: ActionBarPlacement.OnBar
+               id:seekResearch
+               title: "Rechercher"
+               imageSource: "asset:///images/ic_search.png"
+               ActionBar.placement: ActionBarPlacement.Signature
+               backgroundColor: Color.create("#BDC3C7")
                onTriggered: {
-                   myIndicator.start();
-                   dataSource.load();
-                   myIndicator.stop();
-                   nav.navigateTo(firstPage);
-                   //nav.po
+                   if (seekResearch.title == "Rechercher") 
+                   {  
+                       searchText.visible = true 
+                       searchText.requestFocus();
+                   } 
+                   else if (seekResearch.title == "Accueil")
+                   {
+                       searchText.visible = false
+                       searchText.text = ''
+                       dataSource.source = "http://www.blackberry-10.fr/jsonfile_last10.php"
+                       myIndicator.start();
+                       dataSource.load();
+                       myIndicator.stop();
+                       nav.navigateTo(firstPage);
+                       seekResearch.title = "Rechercher"
+                       seekResearch.imageSource = "asset:///images/ic_search.png"
+                   }
+
                }
            },
            ActionItem {
@@ -197,6 +246,20 @@ NavigationPane {
                onTriggered: {
                    var page = wallPages.createObject();
                    nav.push(page);
+               }
+           },
+           ActionItem {
+               title: "Partager"
+               imageSource: "asset:///images/ic_bbm.png"
+               onTriggered: {
+                   _app.inviteUserToDownloadViaBBM()
+               }
+           },
+           ActionItem {
+               title: "BBM Status"
+               imageSource: "asset:///images/ic_edit_profile.png"
+               onTriggered: {
+                   _app.updatePersonalMessage("Utilise l'application des Addicts")
                }
            }
        ]
@@ -233,16 +296,28 @@ NavigationPane {
             grouping: ItemGrouping.ByFullValue
             sortingKeys: ["date","id"]
         },
+        SystemToast {
+            id: myQmlSearch
+            body: "Aucun résultat pour votre recherche"
+            onFinished: {
+                
+            }
+        },
         DataSource {
                     id: dataSource
                     source : "http://www.blackberry-10.fr/jsonfile_last10.php"
                     type: DataSourceType.Json
                     remote: true
+                    onSourceChanged: {
+                        Qt.test = 0;
+                        dataModel.clear();
+                        load();
+                    }
+                    
                     onDataLoaded: {
-                        
+                        Qt.test = 0;
                         dataModel.clear(); 
                         var Max = 0;
-                        
                         function setMax()
                         {
                             var i = 0;
@@ -260,9 +335,7 @@ NavigationPane {
                         //monIdArticle = setMax();
                         articlefirst.text = setMax();
                         Qt.test = setMax();
-
                         dataModel.insertList(data);
-                       
                         myIndicator.stop();
                     }
         }   

@@ -17,7 +17,7 @@
 #include "applicationui.hpp"
 #include "WebImageView.h"
 
-
+#include <bb/system/SystemDialog>
 #include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
@@ -46,17 +46,31 @@ ApplicationUI::ApplicationUI() :
     // initial load
     onSystemLanguageChanged();
     qmlRegisterType<WebImageView>("org.labsquare", 1, 0, "WebImageView");
+
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
-
+    qml->setContextProperty("_app", this);
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     first = 0;
     qml->setContextProperty("ApplicationUI", this);
 
+    m_context = new bb::platform::bbm::Context(
+            //UUID was generated at random for this sample
+            //BE SURE TO USE YOUR OWN UNIQUE UUID. You can gerneate one here: http://www.guidgenerator.com/
+            QUuid("15e4be70-fd36-11e2-b778-0800200c9a66"));
+    if (m_context->registrationState()
+            != bb::platform::bbm::RegistrationState::Allowed) {
+        connect(m_context,
+                SIGNAL(registrationStateUpdated (bb::platform::bbm::RegistrationState::Type)),
+                this,
+                SLOT(registrationStateUpdated (bb::platform::bbm::RegistrationState::Type)));
+        m_context->requestRegisterApplication();
+    }
     // Set created root object as the application scene
     Application::instance()->setScene(root);
+
 }
 
 QByteArray ApplicationUI::encodeQString(const QString& toEncode) const {
@@ -116,6 +130,48 @@ void ApplicationUI::onSystemLanguageChanged()
 QString ApplicationUI::getID()
 {
     return "1";
+}
+
+void ApplicationUI::inviteUserToDownloadViaBBM() {
+    if (m_context->registrationState()
+            == bb::platform::bbm::RegistrationState::Allowed) {
+        m_messageService->sendDownloadInvitation();
+    } else {
+        SystemDialog *bbmDialog = new SystemDialog("OK");
+        bbmDialog->setTitle("BBM Connection Error");
+        bbmDialog->setBody(
+                "BBM is not currently connected. Please setup / sign-in to BBM to remove this message.");
+        connect(bbmDialog, SIGNAL(finished(bb::system::SystemUiResult::Type)),
+                this, SLOT(dialogFinished(bb::system::SystemUiResult::Type)));
+        bbmDialog->show();
+        return;
+    }
+}
+
+void ApplicationUI::updatePersonalMessage(const QString &message) {
+    if (m_context->registrationState()
+            == bb::platform::bbm::RegistrationState::Allowed) {
+        m_userProfile->requestUpdatePersonalMessage(message);
+    } else {
+        SystemDialog *bbmDialog = new SystemDialog("OK");
+        bbmDialog->setTitle("BBM Connection Error");
+        bbmDialog->setBody(
+                "BBM is not currently connected. Please setup / sign-in to BBM to remove this message.");
+        connect(bbmDialog, SIGNAL(finished(bb::system::SystemUiResult::Type)),
+                this, SLOT(dialogFinished(bb::system::SystemUiResult::Type)));
+        bbmDialog->show();
+        return;
+    }
+}
+void ApplicationUI::registrationStateUpdated(
+        bb::platform::bbm::RegistrationState::Type state) {
+    if (state == bb::platform::bbm::RegistrationState::Allowed) {
+        m_messageService = new bb::platform::bbm::MessageService(m_context,
+                this);
+        m_userProfile = new bb::platform::bbm::UserProfile(m_context, this);
+    } else if (state == bb::platform::bbm::RegistrationState::Unregistered) {
+        m_context->requestRegisterApplication();
+    }
 }
 
 //void ApplicationUI::setID()

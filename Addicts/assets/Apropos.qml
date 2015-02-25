@@ -48,14 +48,14 @@ Page {
             text: "Twitter"
             imageSource: "asset:///icon/128-twitter.png"
             onClicked: {
-                ApplicationUI.twitter("http://appworld.blackberry.com/webstore/content/59952277/?lang=fr&countrycode=US&CPID=KNC-kw2112_p13")
+                ApplicationUI.twitter("Télécharger l'application des Addicts ! http://appworld.blackberry.com/webstore/content/59952277/?lang=fr&countrycode=US&CPID=KNC-kw2112_p13")
             }
         }
         Button {
             text: "Facebook"
             imageSource: "asset:///icon/128-facebook.png"
             onClicked: {
-            ApplicationUI.facebook("http://appworld.blackberry.com/webstore/content/59952277/?lang=fr&countrycode=US&CPID=KNC-kw2112_p13")
+                ApplicationUI.facebook("Télécharger l'application des Addicts ! http://appworld.blackberry.com/webstore/content/59952277/?lang=fr&countrycode=US&CPID=KNC-kw2112_p13")
             }
         }
     }

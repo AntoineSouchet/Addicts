@@ -1,10 +1,13 @@
-import bb.cascades 1.2
+import bb.cascades 1.3
+import org.labsquare 1.0
 
 Page {
     property alias contenu : webView.html
     property alias titlearticle: titlearticle.title
     property alias titlejson : titleJson.text
     property alias urljson: urlJson.text
+//    property alias urlimg: imageArticle.url
+    
     titleBar: TitleBar {
         id: titlearticle
     }
@@ -28,13 +31,26 @@ Page {
             visible: false
             text: ""
         }
-
+//        WebImageView {
+//            topMargin: 0
+//            bottomMargin: 0
+//            id:imageArticle
+//            preferredWidth: 1800
+//            preferredHeight: 320
+//            scalingMethod: ScalingMethod.AspectFit
+//        }
+        Divider {
+            verticalAlignment: VerticalAlignment.Bottom
+            horizontalAlignment: HorizontalAlignment.Center          
+        }
         ScrollView {
             scrollViewProperties {
-                scrollMode: ScrollMode.Both
+                scrollMode: ScrollMode.Vertical
             }
+            
             WebView {
                 id: webView
+                leftMargin: 0
                     onLoadingChanged: {
                         if (loadRequest.status ==  WebLoadStatus.Started ) {
                             indicatorWeb.start();
@@ -49,20 +65,16 @@ Page {
                             webView.html = "<b>Impossible de charger la page, vérifiez votre connection Internet.</b>"
                         }
                     }
-               // html: "<body style=\"height: 100%;background-color:black;\"><p><span style='color: #2980b9;'>Sample HTML code with relative height on the body tag</span></p></body>"
-            }
+                    onNewViewRequested: {
+                        //TODO get URL and load navigator
+                    }
+          }
             
-        }
-//        attachedObjects: LayoutUpdateHandler {
-//            onLayoutFrameChanged: {
-//                webView.preferredHeight = layoutFrame.height;
-//            }
-//        }
-        
+        }    
     }
     actions: [
         InvokeActionItem {
-            ActionBar.placement: ActionBarPlacement.OnBar
+            ActionBar.placement: ActionBarPlacement.Signature
             query {
                 mimeType: "text/plain"
                 invokeActionId: "bb.action.SHARE"

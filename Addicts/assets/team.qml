@@ -50,7 +50,7 @@ Page {
         ActionItem {
             title: "Accueil"
             imageSource: "asset:///images/ic_home.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
+            ActionBar.placement: ActionBarPlacement.Signature
             onTriggered: {
                 nav.navigateTo(firstPage);
                 //nav.po

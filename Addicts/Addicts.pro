@@ -7,5 +7,6 @@ LIBS += -lbb
 LIBS += -lbbdata
 LIBS += -lbbsystem
 LIBS += -lbbplatform
+LIBS += -lbbplatformbbm -lbbsystem
 
 include(config.pri)

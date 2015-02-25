@@ -19,7 +19,9 @@
 
 #include <QObject>
 #include <QtNetwork>
-
+#include <bb/platform/bbm/Context>
+#include <bb/platform/bbm/MessageService>
+#include <bb/platform/bbm/UserProfile>
 
 namespace bb
 {
@@ -53,6 +55,10 @@ public:
     QString getID();
     Q_INVOKABLE
     QByteArray encodeQString(const QString& toEncode) const;
+    Q_INVOKABLE
+        void inviteUserToDownloadViaBBM();
+        Q_INVOKABLE
+        void updatePersonalMessage(const QString &message);
 
 private slots:
     void onSystemLanguageChanged();
@@ -61,6 +67,13 @@ private slots:
 private:
     QTranslator* m_pTranslator;
     bb::cascades::LocaleHandler* m_pLocaleHandler;
+    bb::platform::bbm::UserProfile * m_userProfile;
+        bb::platform::bbm::Context *m_context;
+        bb::platform::bbm::MessageService *m_messageService;
+        Q_SLOT
+        void registrationStateUpdated(
+                bb::platform::bbm::RegistrationState::Type state);
+
 };
 
 #endif /* ApplicationUI_HPP_ */

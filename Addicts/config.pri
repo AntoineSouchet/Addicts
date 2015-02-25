@@ -43,10 +43,13 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/icon/128-twitter.png) \
         $$quote($$BASEDIR/assets/images/Addicts.png) \
         $$quote($$BASEDIR/assets/images/ic_add_bookmarks.png) \
+        $$quote($$BASEDIR/assets/images/ic_bbm.png) \
         $$quote($$BASEDIR/assets/images/ic_contact.png) \
+        $$quote($$BASEDIR/assets/images/ic_edit_profile.png) \
         $$quote($$BASEDIR/assets/images/ic_help.png) \
         $$quote($$BASEDIR/assets/images/ic_home.png) \
         $$quote($$BASEDIR/assets/images/ic_resume.png) \
+        $$quote($$BASEDIR/assets/images/ic_search.png) \
         $$quote($$BASEDIR/assets/images/ic_select.png) \
         $$quote($$BASEDIR/assets/images/ic_share.png) \
         $$quote($$BASEDIR/assets/images/ic_view_image.png) \
