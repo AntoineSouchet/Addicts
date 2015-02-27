@@ -1,5 +1,5 @@
 1
-46
+47
 aPropos.qml
 articleWebView.qml
 icon/128-facebook.png
@@ -8,6 +8,7 @@ ImageArticle.qml
 images/Addicts.png
 images/ic_add_bookmarks.png
 images/ic_bbm.png
+images/ic_browser.png
 images/ic_contact.png
 images/ic_edit_profile.png
 images/ic_help.png

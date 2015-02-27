@@ -28,24 +28,17 @@ NavigationPane {
     id: nav
     Menu.definition: MenuDefinition {        
         actions: [
-            ActionItem {
-                title: "Accueil"
-                imageSource: "asset:///images/ic_home.png"
-                onTriggered: {
-                    myIndicator.start();
-                    dataSource.load();
-                    myIndicator.stop();
-                    nav.navigateTo(firstPage);
-
-                }
-            },
-            ActionItem {
-                title: "Préférences"
-                onTriggered: {
-                    var page = prefPages.createObject();
-                    nav.push(page);
-                }
-            },
+//            ActionItem {
+//                title: "Accueil"
+//                imageSource: "asset:///images/ic_home.png"
+//                onTriggered: {
+//                    myIndicator.start();
+//                    dataSource.load();
+//                    myIndicator.stop();
+//                    nav.navigateTo(firstPage);
+//
+//                }
+//            },
             ActionItem {
                 title: "A propos"
                 imageSource: "asset:///images/ic_help.png"
@@ -55,10 +48,24 @@ NavigationPane {
                 }
             },
             ActionItem {
+                title: "Partager"
+                imageSource: "asset:///images/ic_bbm.png"
+                onTriggered: {
+                    _app.inviteUserToDownloadViaBBM()
+                }
+            },
+            ActionItem {
                 title: "Noter"
                 imageSource: "asset:///images/ic_add_bookmarks.png"
                 onTriggered: {
                     ApplicationUI.BBWorld();
+                }
+            },
+            ActionItem {
+                title: "Préférences"
+                onTriggered: {
+                    var page = prefPages.createObject();
+                    nav.push(page);
                 }
             }
         ] 
@@ -66,10 +73,12 @@ NavigationPane {
     
     Page {
         id:firstPage  
-        titleBar: TitleBar {
-            title : "Addicts"
+        titleBar: 
+            TitleBar {
+            title : "Addicts"        
         }
         
+
         Container {
             id: firstContent
             TextField {
@@ -81,14 +90,16 @@ NavigationPane {
                 submitKey: SubmitKey.Search
                 onSubmitted: {
                     var recherche = searchText.text;
-                    var urlSearch = 'http://www.blackberry-10.fr/jsonfile_search.php?query=' + recherche;
-                    dataSource.setSource(urlSearch);
-                    //dataModel.clear();
-                    dataSource.load();
-                    
+                    if (ApplicationUI.CheckInjection(recherche) == false)
+                    {
+                        var urlSearch = 'http://www.blackberry-10.fr/jsonfile_search.php?query=' + recherche;
+                        dataSource.setSource(urlSearch);
+                        //dataModel.clear();
+                        dataSource.load();
+                        seekResearch.title = "Rafraichir"
+                        seekResearch.imageSource = "asset:///images/ic_resume.png"
+                    }
 
-                    seekResearch.title = "Accueil"
-                    seekResearch.imageSource = "asset:///images/ic_home.png"
                 }
             }
             }
@@ -96,6 +107,7 @@ NavigationPane {
             ActivityIndicator {
                 id: myIndicator
                 horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
                 minHeight: 200
                 minWidth: 200
                 accessibility.name: "myIndicator"
@@ -108,9 +120,10 @@ NavigationPane {
                         type: "item"
                         
                         content: Container {
-                            preferredHeight: if(ListItemData.id != Qt.test) { 200; }
-                            leftMargin: 0
-                            leftPadding: 0
+                            preferredHeight: if(ListItemData.id != Qt.test) { 120; } else { 350; }
+
+
+
                             layout: StackLayout {
                                 orientation: if (ListItemData.id != Qt.test) { LayoutOrientation.LeftToRight } 
                             }
@@ -134,31 +147,29 @@ NavigationPane {
                                 preferredWidth: 325
                                 minWidth: 325
                                 maxWidth: 325
-
-
                                 visible: if(ListItemData.id != Qt.test) { true; } else { false; }
                         }
-                        
-                        Label {
-                            id: articleText
-                            visible: if(ListItemData.id != Qt.test) { true; } else { false; }
-                            multiline: true
-                            verticalAlignment: VerticalAlignment.Center
-                            text: ListItemData.nom
+                        Container {
+                            layout: StackLayout {
+                                orientation: LayoutOrientation.TopToBottom
+                            }
+                            Label {
+                                id: articleText
+                                visible: if(ListItemData.id != Qt.test) { true; } else { false; }
+                                multiline: true
+                                horizontalAlignment: HorizontalAlignment.Center
+                                text: ListItemData.nom
+                            }
+                            WebView {
+                                topMargin: 10;
+                                html: '<html><iframe style="border:0px;height:20px;"src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.blackberry-10.fr%2Farticle-' + ListItemData.url + '&width&layout=button_count&action=like&show_faces=true&share=true&height=21&appId=827540957260617"></iframe></html>'
+                                horizontalAlignment: HorizontalAlignment.Center
+                                verticalAlignment: VerticalAlignment.Center
+                                //html:"<html>OK</html>"
+                                //url: "https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.blackberry-10.fr%2Farticle-27022015-blackberry-travaille-avec-google-pour-securiser-android&width&layout=button&action=like&show_faces=true&share=true&height=80&appId=827540957260617"
+                            }
                         }
                         
-                            Label {
-                                horizontalAlignment: if(ListItemData.id != Qt.test) { HorizontalAlignment.Left; } else { HorizontalAlignment.Right; }
-                                verticalAlignment: VerticalAlignment.Bottom
-                                visible: if(ListItemData.id != Qt.test) { true } else { false }
-                                text: "<html><span style='color: #2980b9;font-size:5;'><b>Rédigé par " + ListItemData.auteur +".</b></span></html>"
-
-                            }
-                            Divider {
-                                verticalAlignment: VerticalAlignment.Bottom
-                                horizontalAlignment: HorizontalAlignment.Center          
-                            }
-
                         }
                     }
                 ]
@@ -176,7 +187,7 @@ NavigationPane {
                     }
                     else if (Application.themeSupport.theme.colorTheme.style == 2)
                     {
-                        page.contenu = "<body style=\"height: 100%;background-color:black;style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;\"><img src=\"" + selectedItem.image + "\"><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:white';><div style=\"text-align: justify\">" + selectedItem.corps + "</div></span></body>";
+                    page.contenu = "<body style=\"height: 100%;background-color:black;style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size: 1em;\"><img src=\"" + selectedItem.image + "\"><span style='color: #2980b9;'><u>Le " + selectedItem.date +" par <b>" + selectedItem.auteur + "</b></span></u><br /><br /><span style='color:white';><div style=\"text-align: justify\">" + selectedItem.corps + "</div></span></body>";
                     }
                     page.titlearticle = selectedItem.nom
                     page.titlejson = selectedItem.nom
@@ -217,7 +228,7 @@ NavigationPane {
                        searchText.visible = true 
                        searchText.requestFocus();
                    } 
-                   else if (seekResearch.title == "Accueil")
+                   else if (seekResearch.title == "Rafraichir")
                    {
                        searchText.visible = false
                        searchText.text = ''
@@ -248,13 +259,7 @@ NavigationPane {
                    nav.push(page);
                }
            },
-           ActionItem {
-               title: "Partager"
-               imageSource: "asset:///images/ic_bbm.png"
-               onTriggered: {
-                   _app.inviteUserToDownloadViaBBM()
-               }
-           },
+
            ActionItem {
                title: "BBM Status"
                imageSource: "asset:///images/ic_edit_profile.png"
@@ -347,5 +352,7 @@ NavigationPane {
         myIndicator.start();
 
         dataSource.load();
+
     }
+
 }

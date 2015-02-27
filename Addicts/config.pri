@@ -4,10 +4,22 @@ BASEDIR = $$quote($$_PRO_FILE_PWD_)
 device {
     CONFIG(debug, debug|release) {
         profile {
+            INCLUDEPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtSql)
+
+            DEPENDPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtSql)
+
+            LIBS += -lQtSql
+
             CONFIG += \
                 config_pri_assets \
                 config_pri_source_group1
         } else {
+            INCLUDEPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtSql)
+
+            DEPENDPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtSql)
+
+            LIBS += -lQtSql
+
             CONFIG += \
                 config_pri_assets \
                 config_pri_source_group1
@@ -17,6 +29,12 @@ device {
 
     CONFIG(release, debug|release) {
         !profile {
+            INCLUDEPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtSql)
+
+            DEPENDPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtSql)
+
+            LIBS += -lQtSql
+
             CONFIG += \
                 config_pri_assets \
                 config_pri_source_group1
@@ -27,6 +45,12 @@ device {
 simulator {
     CONFIG(debug, debug|release) {
         !profile {
+            INCLUDEPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtSql)
+
+            DEPENDPATH += $$quote(${QNX_TARGET}/usr/include/qt4/QtSql)
+
+            LIBS += -lQtSql
+
             CONFIG += \
                 config_pri_assets \
                 config_pri_source_group1
@@ -44,6 +68,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/Addicts.png) \
         $$quote($$BASEDIR/assets/images/ic_add_bookmarks.png) \
         $$quote($$BASEDIR/assets/images/ic_bbm.png) \
+        $$quote($$BASEDIR/assets/images/ic_browser.png) \
         $$quote($$BASEDIR/assets/images/ic_contact.png) \
         $$quote($$BASEDIR/assets/images/ic_edit_profile.png) \
         $$quote($$BASEDIR/assets/images/ic_help.png) \
@@ -86,11 +111,13 @@ config_pri_assets {
 
 config_pri_source_group1 {
     SOURCES += \
+        $$quote($$BASEDIR/src/Preferences.cpp) \
         $$quote($$BASEDIR/src/WebImageView.cpp) \
         $$quote($$BASEDIR/src/applicationui.cpp) \
         $$quote($$BASEDIR/src/main.cpp)
 
     HEADERS += \
+        $$quote($$BASEDIR/src/Preferences.h) \
         $$quote($$BASEDIR/src/WebImageView.h) \
         $$quote($$BASEDIR/src/applicationui.hpp)
 }

@@ -48,11 +48,25 @@ public:
     Q_INVOKABLE
     void twitter(QString);
     Q_INVOKABLE
+    void TwitterOpen();
+    Q_INVOKABLE
     void facebook(QString);
+    Q_INVOKABLE
+    void facebookOpen();
+    Q_INVOKABLE
+    void BBMOpen();
+    Q_INVOKABLE
+    void browser(QString url);
     Q_INVOKABLE
     void BBWorld();
     Q_INVOKABLE
     QString getID();
+    Q_INVOKABLE
+    void changeTheme(QString theme);
+    Q_INVOKABLE
+    void cleanApplication();
+    Q_INVOKABLE
+    bool CheckInjection(QString wordSearch);
     Q_INVOKABLE
     QByteArray encodeQString(const QString& toEncode) const;
     Q_INVOKABLE

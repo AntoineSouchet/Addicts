@@ -22,11 +22,22 @@ Page {
         Label {
             text: "<html><b>Retrouvez nous sur :</b></html>"
         }
-        Label {
-            text:"<html><a href='https://www.facebook.com/AddictsABlackberry10?fref=ts'>Facebook</a></html>";
+//        Label {
+//            text:"<html><a href='https://www.facebook.com/AddictsABlackberry10?fref=ts'>Facebook</a></html>";
+//        }
+        Button {
+            text: "Facebook"
+            imageSource: "asset:///icon/128-facebook.png"
+            onClicked: {
+                ApplicationUI.facebookOpen();
+            }
         }
-        Label {
-            text:"<html><a href='https://twitter.com/blackberry10_fr'>Twitter</a></html>";
+        Button {
+            text: "Twitter"
+            imageSource: "asset:///icon/128-twitter.png"
+            onClicked: {
+                ApplicationUI.TwitterOpen();
+                }
         }
         Label {
             text: "<html><b>Développeurs</b></html>"

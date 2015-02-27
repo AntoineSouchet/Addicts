@@ -22,7 +22,7 @@ static const uint qt_meta_data_ApplicationUI[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,11 +36,18 @@ static const uint qt_meta_data_ApplicationUI[] = {
  // methods: signature, parameters, type, tag, flags
      116,   14,   14,   14, 0x02,
      133,   14,   14,   14, 0x02,
-     151,   14,   14,   14, 0x02,
-     169,   14,  161,   14, 0x02,
-     197,  188,  177,   14, 0x02,
-     220,   14,   14,   14, 0x02,
-     257,  249,   14,   14, 0x02,
+     147,   14,   14,   14, 0x02,
+     165,   14,   14,   14, 0x02,
+     180,   14,   14,   14, 0x02,
+     194,  190,   14,   14, 0x02,
+     211,   14,   14,   14, 0x02,
+     229,   14,  221,   14, 0x02,
+     243,  237,   14,   14, 0x02,
+     264,   14,   14,   14, 0x02,
+     299,  288,  283,   14, 0x02,
+     343,  334,  323,   14, 0x02,
+     366,   14,   14,   14, 0x02,
+     403,  395,   14,   14, 0x02,
 
        0        // eod
 };
@@ -49,8 +56,12 @@ static const char qt_meta_stringdata_ApplicationUI[] = {
     "ApplicationUI\0\0onSystemLanguageChanged()\0"
     "state\0"
     "registrationStateUpdated(bb::platform::bbm::RegistrationState::Type)\0"
-    "twitter(QString)\0facebook(QString)\0"
-    "BBWorld()\0QString\0getID()\0QByteArray\0"
+    "twitter(QString)\0TwitterOpen()\0"
+    "facebook(QString)\0facebookOpen()\0"
+    "BBMOpen()\0url\0browser(QString)\0BBWorld()\0"
+    "QString\0getID()\0theme\0changeTheme(QString)\0"
+    "cleanApplication()\0bool\0wordSearch\0"
+    "CheckInjection(QString)\0QByteArray\0"
     "toEncode\0encodeQString(QString)\0"
     "inviteUserToDownloadViaBBM()\0message\0"
     "updatePersonalMessage(QString)\0"
@@ -65,14 +76,22 @@ void ApplicationUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 0: _t->onSystemLanguageChanged(); break;
         case 1: _t->registrationStateUpdated((*reinterpret_cast< bb::platform::bbm::RegistrationState::Type(*)>(_a[1]))); break;
         case 2: _t->twitter((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: _t->facebook((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 4: _t->BBWorld(); break;
-        case 5: { QString _r = _t->getID();
+        case 3: _t->TwitterOpen(); break;
+        case 4: _t->facebook((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: _t->facebookOpen(); break;
+        case 6: _t->BBMOpen(); break;
+        case 7: _t->browser((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 8: _t->BBWorld(); break;
+        case 9: { QString _r = _t->getID();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 6: { QByteArray _r = _t->encodeQString((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 10: _t->changeTheme((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 11: _t->cleanApplication(); break;
+        case 12: { bool _r = _t->CheckInjection((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 13: { QByteArray _r = _t->encodeQString((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = _r; }  break;
-        case 7: _t->inviteUserToDownloadViaBBM(); break;
-        case 8: _t->updatePersonalMessage((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 14: _t->inviteUserToDownloadViaBBM(); break;
+        case 15: _t->updatePersonalMessage((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -110,9 +129,9 @@ int ApplicationUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 16;
     }
     return _id;
 }

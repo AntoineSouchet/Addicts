@@ -20,8 +20,10 @@ Page {
                     // Control your task
                     if (checked) {
                         Application.themeSupport.setVisualStyle(VisualStyle.Dark);
+                        ApplicationUI.changeTheme("Dark");
                     } else {
                         Application.themeSupport.setVisualStyle(VisualStyle.Bright);
+                        ApplicationUI.changeTheme("White");
                     }
                 }
                 
@@ -43,6 +45,7 @@ Page {
                 }   
             ]
             onClicked: {
+                ApplicationUI.cleanApplication();
                 cacheToast.show()
             }
         }

@@ -13,6 +13,7 @@ Container {
         horizontalAlignment: HorizontalAlignment.Center
         preferredWidth: 1500
         minHeight: 300
+        maxHeight: 310
         scalingMethod: ScalingMethod.AspectFill
 
     }

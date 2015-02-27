@@ -51,6 +51,10 @@ Page {
             WebView {
                 id: webView
                 leftMargin: 0
+                saveImageAction.enabled: false
+//                shareImageAction.enabled: false
+//                copyLinkAction.enabled: false
+
                     onLoadingChanged: {
                         if (loadRequest.status ==  WebLoadStatus.Started ) {
                             indicatorWeb.start();
@@ -65,9 +69,14 @@ Page {
                             webView.html = "<b>Impossible de charger la page, vérifiez votre connection Internet.</b>"
                         }
                     }
+                    onTouch: {
+                        
+                    }
                     onNewViewRequested: {
                         //TODO get URL and load navigator
                     }
+                    
+                    
           }
             
         }    
@@ -82,6 +91,15 @@ Page {
             onTriggered: {
                 data = ApplicationUI.encodeQString(titlearticle.title + " http://www.blackberry-10.fr/article-" + urlJson.text + " Partagé via l'application Addicts.");
             }
+        },
+        ActionItem {
+            title: "Ouvrir dans navigateur"
+            imageSource: "asset:///images/ic_browser.png"
+            onTriggered: {
+                ApplicationUI.browser("http://www.blackberry-10.fr/article-" + urlJson.text);
+            }
         }
     ]
-}
+    }
+
+
